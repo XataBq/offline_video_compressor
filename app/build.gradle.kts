@@ -41,9 +41,6 @@ dependencies {
     implementation(project(":core-navigation-api"))
     implementation(project(":feature-video-compressor-ui"))
     implementation(project(":feature-video-compressor-impl"))
-    implementation(libs.kotea.core)
-    implementation(libs.kotea.android) // android extensions
-    implementation(libs.kotea.logging) // factory with logging feature
     // timber
     implementation(libs.timber)
 

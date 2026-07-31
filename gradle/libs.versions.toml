@@ -20,13 +20,15 @@ ktlintGradle = "14.0.1"
 jetbrainsKotlinJvm = "2.2.21"
 appcompatVersion = "1.7.1"
 materialVersion = "1.14.0"
+media3 = "1.10.1"
 
 [libraries]
+#media
+media3-transformer = { module = "androidx.media3:media3-transformer", version.ref = "media3" }
+media3-effect = { module = "androidx.media3:media3-effect", version.ref = "media3" }
+media3-common = { module = "androidx.media3:media3-common", version.ref = "media3" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber"}
 #hilt
-kotea-logging = { module = "ru.tinkoff.kotea:logging", version.ref = "kotea" }
-kotea-android = { module = "ru.tinkoff.kotea:android", version.ref = "kotea" }
-kotea-core = { module = "ru.tinkoff.kotea:core", version.ref = "kotea" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavCompose" }

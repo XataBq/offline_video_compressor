@@ -29,6 +29,10 @@ android {
 }
 
 dependencies {
+    //media
+    implementation(libs.media3.common)
+    implementation(libs.media3.effect)
+    implementation(libs.media3.transformer)
     // Hilt DI (Dependency Injection) + интеграция с Compose + KSP компилятор
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
