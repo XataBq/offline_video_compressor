@@ -2,7 +2,7 @@ package com.example.offlinevideocompressor.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
-import com.example.feature_video_compressor_ui.navigation.directions.VideoCompressorStartDirectionProvider
+import com.example.feature.video.compressor.ui.navigation.CompressorNavigationGraph
 
 @Composable
 internal fun AppGraph() {
@@ -10,6 +10,6 @@ internal fun AppGraph() {
     BaseAppNavigation(
         navController = navController,
         featureGraphs = FeatureGraphs.FEATURE_GRAPHS,
-        startDirectionProvider = VideoCompressorStartDirectionProvider,
+        startDirectionProvider = CompressorNavigationGraph.COMPRESSOR_GRAPH_ROUTE,
     )
 }

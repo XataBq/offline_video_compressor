@@ -1,6 +1,5 @@
-package com.example.feature_video_compressor_ui.ui.components
+package com.example.feature.video.compressor.ui.presentation.components
 
-import android.R.attr.onClick
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState

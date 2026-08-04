@@ -1,4 +1,4 @@
-package com.example.feature_video_compressor_ui.ui.screens
+package com.example.feature.video.compressor.ui.presentation.screens.videocompressorstart
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -42,10 +42,10 @@ import com.example.core_desing_system.theme.SurfacePurple
 import com.example.core_desing_system.theme.TextPrimary
 import com.example.core_desing_system.theme.TextSecondary
 import com.example.core_desing_system.theme.VideoCompressorTypography
-import com.example.feature_video_compressor_ui.R
-import com.example.feature_video_compressor_ui.ui.components.BenefitRow
-import com.example.feature_video_compressor_ui.ui.components.ChooseVideoButton
-import com.example.feature_video_compressor_ui.ui.components.SettingsButton
+import com.example.feature.video.compressor.ui.R
+import com.example.feature.video.compressor.ui.presentation.components.BenefitRow
+import com.example.feature.video.compressor.ui.presentation.components.ChooseVideoButton
+import com.example.feature.video.compressor.ui.presentation.components.SettingsButton
 
 @Composable
 internal fun VideoCompressorScreen(

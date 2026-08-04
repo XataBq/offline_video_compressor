@@ -31,9 +31,12 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import android.media.MediaCodecInfo.EncoderCapabilities.BITRATE_MODE_VBR
 import com.example.feature_video_compressor_impl.mappers.toMimeType
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
 @UnstableApi
-class Media3VideoCompressor(
+class Media3VideoCompressor @Inject constructor(
+    @ApplicationContext
     private val context: Context,
     private val metadataReader: VideoMetadataReader,
     private val settingsResolver: CompressionSettingsResolver,

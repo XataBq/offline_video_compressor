@@ -3,9 +3,10 @@ package com.example.feature_video_compressor_impl.calculator
 import com.example.feature_video_compressor_api.model.CompressionQuality
 import com.example.feature_video_compressor_api.model.VideoCodec
 import com.example.feature_video_compressor_impl.metadata.VideoMetadata
+import javax.inject.Inject
 import kotlin.math.roundToInt
 
-class VideoBitrateCalculator {
+class VideoBitrateCalculator @Inject constructor() {
 
     fun calculate(
         metadata: VideoMetadata,

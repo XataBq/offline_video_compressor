@@ -1,0 +1,58 @@
+package com.example.feature.video.compressor.ui.navigation
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.ViewModel
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
+import com.example.core_navigation_api.domain.FeatureNavGraph
+import com.example.core_navigation_api.domain.StartDirectionProvider
+import com.example.feature.video.compressor.ui.navigation.directions.VideoCompressorResultDirection
+import com.example.feature.video.compressor.ui.navigation.directions.VideoCompressorStartDirectionProvider
+import com.example.feature.video.compressor.ui.presentation.VideoCompressorViewModel
+import com.example.feature.video.compressor.ui.presentation.screens.VideoCompressorResultScreen
+import com.example.feature.video.compressor.ui.presentation.screens.videocompressorstart.VideoCompressorRoute
+
+class CompressorNavigationGraph : FeatureNavGraph {
+    override val startDirection: StartDirectionProvider
+        get() = VideoCompressorStartDirectionProvider
+
+    override fun NavGraphBuilder.register(navController: NavController) {
+        navigation(
+            route = COMPRESSOR_GRAPH_ROUTE,
+            startDestination = startDirection.screenName,
+        ) {
+            composable(startDirection.screenName) { backStackEntry ->
+                val viewModel = sharedGraphViewModel<VideoCompressorViewModel>(
+                    navController = navController,
+                    backStackEntry = backStackEntry,
+                )
+                VideoCompressorRoute(
+                    viewModel = viewModel
+                )
+            }
+            composable(VideoCompressorResultDirection.screenName) { backStackEntry ->
+                VideoCompressorResultScreen()
+            }
+        }
+    }
+
+    companion object {
+        const val COMPRESSOR_GRAPH_ROUTE = "compressor_graph"
+    }
+}
+
+@Composable
+private inline fun <reified VM: ViewModel> sharedGraphViewModel(
+    navController: NavController,
+    backStackEntry: NavBackStackEntry,
+): VM {
+    val graphBackStackEntry = remember(backStackEntry) {
+        navController.getBackStackEntry(CompressorNavigationGraph.COMPRESSOR_GRAPH_ROUTE)
+    }
+    return hiltViewModel(graphBackStackEntry)
+}

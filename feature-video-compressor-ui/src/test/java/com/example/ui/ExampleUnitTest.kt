@@ -1,4 +1,4 @@
-package com.example.feature_video_compressor_ui
+package com.example.ui
 
 import org.junit.Test
 

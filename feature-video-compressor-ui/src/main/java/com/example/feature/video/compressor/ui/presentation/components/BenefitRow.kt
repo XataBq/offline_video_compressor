@@ -1,4 +1,4 @@
-package com.example.feature_video_compressor_ui.ui.components
+package com.example.feature.video.compressor.ui.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -27,7 +27,7 @@ import com.example.core_desing_system.theme.PrimaryLight
 import com.example.core_desing_system.theme.TextPrimary
 import com.example.core_desing_system.theme.TextSecondary
 import com.example.core_desing_system.theme.VideoCompressorTypography
-import com.example.feature_video_compressor_ui.R
+import com.example.feature.video.compressor.ui.R
 
 @Composable
 internal fun BenefitRow(

@@ -6,8 +6,9 @@ import com.example.feature_video_compressor_api.model.CompressionSettings
 import com.example.feature_video_compressor_api.model.VideoCodec
 import com.example.feature_video_compressor_api.model.VideoFrameRate
 import com.example.feature_video_compressor_api.model.VideoResolution
+import javax.inject.Inject
 
-class CompressionPresetFactory {
+class CompressionPresetFactory @Inject constructor(){
 
     fun create(preset: CompressionPreset): CompressionSettings {
         return when (preset) {

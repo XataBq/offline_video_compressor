@@ -1,4 +1,4 @@
-package com.example.feature_video_compressor_ui.navigation.directions
+package com.example.feature.video.compressor.ui.navigation.directions
 
 import com.example.core_navigation_api.domain.StartDirectionProvider
 

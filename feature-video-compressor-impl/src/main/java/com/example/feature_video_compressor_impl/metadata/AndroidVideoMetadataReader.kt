@@ -3,9 +3,12 @@ package com.example.feature_video_compressor_impl.metadata
 import android.content.Context
 import android.media.MediaMetadataRetriever
 import android.net.Uri
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 import kotlin.math.roundToInt
 
-class AndroidVideoMetadataReader(
+class AndroidVideoMetadataReader @Inject constructor(
+    @ApplicationContext
     private val context: Context,
 ) : VideoMetadataReader {
 

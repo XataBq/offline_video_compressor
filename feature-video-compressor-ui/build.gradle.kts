@@ -1,10 +1,12 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
-    namespace = "com.example.feature_video_compressor_ui"
+    namespace = "com.example.feature.video.compressor.ui"
     compileSdk {
         version = release(36)
     }
@@ -32,6 +34,10 @@ android {
 }
 
 dependencies {
+    // Hilt DI (Dependency Injection) + интеграция с Compose + KSP компилятор
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
     implementation(platform(libs.androidx.compose.bom))
     // timber
     implementation(libs.timber)

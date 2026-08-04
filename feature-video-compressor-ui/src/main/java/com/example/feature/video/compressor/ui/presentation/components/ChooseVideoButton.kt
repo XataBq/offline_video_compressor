@@ -1,4 +1,4 @@
-package com.example.feature_video_compressor_ui.ui.components
+package com.example.feature.video.compressor.ui.presentation.components
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -39,7 +39,7 @@ import com.example.core_desing_system.theme.PrimaryDark
 import com.example.core_desing_system.theme.PrimaryLight
 import com.example.core_desing_system.theme.TextOnPrimary
 import com.example.core_desing_system.theme.VideoCompressorTypography
-import com.example.feature_video_compressor_ui.R
+import com.example.feature.video.compressor.ui.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
