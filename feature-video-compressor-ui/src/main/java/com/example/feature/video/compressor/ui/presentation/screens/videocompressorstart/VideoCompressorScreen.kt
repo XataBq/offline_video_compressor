@@ -6,9 +6,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -46,6 +48,7 @@ import com.example.feature.video.compressor.ui.R
 import com.example.feature.video.compressor.ui.presentation.components.BenefitRow
 import com.example.feature.video.compressor.ui.presentation.components.ChooseVideoButton
 import com.example.feature.video.compressor.ui.presentation.components.SettingsButton
+import com.example.feature.video.compressor.ui.presentation.components.videoHeroIllustration.VideoHeroIllustration
 
 @Composable
 internal fun VideoCompressorScreen(
@@ -109,12 +112,10 @@ internal fun VideoCompressorScreen(
                     .padding(vertical = 20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Icon(
-                    imageVector = Icons.Default.VideoCameraBack,
-                    contentDescription = "video_camera_icon",
+                VideoHeroIllustration(
                     modifier = Modifier
-                        .size(150.dp),
-                    tint = IconPrimary
+                        .width(320.dp)
+                        .height(145.dp),
                 )
                 Text(
                     text = stringResource(R.string.select_video_title),
@@ -128,7 +129,10 @@ internal fun VideoCompressorScreen(
                     style = VideoCompressorTypography.bodySmall,
                     color = TextSecondary
                 )
-                ChooseVideoButton(onChooseVideoButtonClick)
+                ChooseVideoButton(
+                    onClick = onChooseVideoButtonClick,
+                    modifier = Modifier.padding(vertical = 20.dp)
+                )
                 Text(
                     text = stringResource(R.string.supported_formats),
                     style = VideoCompressorTypography.bodySmall,
