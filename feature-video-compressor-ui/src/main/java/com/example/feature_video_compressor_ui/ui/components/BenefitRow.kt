@@ -34,7 +34,7 @@ internal fun BenefitRow(
     titleResource: Int,
     subTitleResource: Int,
     modifier: Modifier = Modifier,
-    iconContent: @Composable () -> Unit,
+    iconContent: @Composable (Modifier) -> Unit,
 ) {
     Row(
         modifier = modifier
@@ -48,7 +48,7 @@ internal fun BenefitRow(
                 .background(IconBackground),
             contentAlignment = Alignment.Center,
         ) {
-            iconContent()
+            iconContent(Modifier.size(25.dp))
         }
         Spacer(modifier = Modifier.width(10.dp))
         Column(

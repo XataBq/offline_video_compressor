@@ -1,4 +1,4 @@
-package com.example.feature_video_compressor_ui.screens
+package com.example.feature_video_compressor_ui.ui.screens
 
 import androidx.compose.runtime.Composable
 
