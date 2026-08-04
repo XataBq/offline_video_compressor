@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Offline Video Compressor</string>
+    <!-- Header -->
+    <string name="home_title">Video Compressor</string>
+    <string name="home_subtitle">
+        Сжимайте видео без потери качества
+        и экономьте место на устройстве
+    </string>
+
+    <!-- Select video card -->
+    <string name="select_video_title">Выберите видео</string>
+    <string name="select_video_description">
+        Нажмите на карточку, чтобы выбрать видео&#10;из галереи
+    </string>
+    <string name="select_video_button">Выбрать видео</string>
+    <string name="supported_formats">Поддерживаются форматы:</string>
+    <string name="supported_formats_list">MP4, MOV, MKV и другие</string>
+
+    <!-- Benefits -->
+    <string name="benefits_title">Почему нам доверяют</string>
+
+    <string name="benefit_no_ads_title">Без рекламы</string>
+    <string name="benefit_no_ads_description">
+        Никаких отвлекающих баннеров
+        и всплывающих окон
+    </string>
+
+    <string name="benefit_no_watermark_title">Без водяных знаков</string>
+    <string name="benefit_no_watermark_description">
+        Ваши видео остаются чистыми
+        и готовыми к публикации
+    </string>
+
+    <string name="benefit_privacy_title">Обработка на устройстве</string>
+    <string name="benefit_privacy_description">
+        Ваши файлы не загружаются в облако.
+        100% конфиденциальность
+    </string>
+
+    <!-- Bottom card -->
+    <string name="bottom_card_title">Быстро, просто и эффективно</string>
+    <string name="bottom_card_description">
+        Сжимайте видео за несколько секунд
+        и делитесь без ограничений.
+    </string>
+
+    <!-- Content descriptions -->
+    <string name="cd_settings">Настройки</string>
+    <string name="cd_select_video">Выбрать видео</string>
+    <string name="cd_arrow">Подробнее</string>
+
+</resources>

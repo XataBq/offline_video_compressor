@@ -39,6 +39,7 @@ android {
 
 dependencies {
     implementation(project(":core-navigation-api"))
+    implementation(project(":core-design-system"))
     implementation(project(":feature-video-compressor-ui"))
     implementation(project(":feature-video-compressor-impl"))
     // timber

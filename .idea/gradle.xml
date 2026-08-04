@@ -23,6 +23,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/build-logic" />
+            <option value="$PROJECT_DIR$/core-design-system" />
             <option value="$PROJECT_DIR$/core-navigation-api" />
             <option value="$PROJECT_DIR$/feature-video-compressor-api" />
             <option value="$PROJECT_DIR$/feature-video-compressor-impl" />

@@ -14,7 +14,7 @@ internal fun BaseAppNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = startDirectionProvider.startDirection,
+        startDestination = startDirectionProvider.screenName,
     ) {
         featureGraphs.forEach { graph ->
             with(graph) {

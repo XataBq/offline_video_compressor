@@ -7,8 +7,8 @@ import com.example.core_navigation_api.domain.FeatureNavGraph
 import com.example.core_navigation_api.domain.StartDirectionProvider
 import com.example.feature_video_compressor_ui.navigation.directions.VideoCompressorResultDirection
 import com.example.feature_video_compressor_ui.navigation.directions.VideoCompressorStartDirectionProvider
-import com.example.feature_video_compressor_ui.videoCompressor.VideoCompressorScreen
-import com.example.feature_video_compressor_ui.videoCompressorResult.VideoCompressorResultScreen
+import com.example.feature_video_compressor_ui.screens.VideoCompressorScreen
+import com.example.feature_video_compressor_ui.screens.VideoCompressorResultScreen
 
 class CompressorNavigationGraph : FeatureNavGraph {
     override val startDirection: StartDirectionProvider
@@ -16,7 +16,9 @@ class CompressorNavigationGraph : FeatureNavGraph {
 
     override fun NavGraphBuilder.register(navController: NavController) {
         composable(startDirection.screenName) { backStackEntry ->
-            VideoCompressorScreen()
+            VideoCompressorScreen(
+                onClick = {}
+            )
         }
         composable(VideoCompressorResultDirection.screenName) { backStackEntry ->
             VideoCompressorResultScreen()

@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core-navigation-api"
+    namespace = "com.example.core_navigation_api"
     compileSdk {
         version = release(36)
     }
