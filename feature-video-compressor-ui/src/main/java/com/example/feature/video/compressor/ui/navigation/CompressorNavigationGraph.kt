@@ -16,7 +16,7 @@ import com.example.feature.video.compressor.ui.navigation.directions.VideoCompre
 import com.example.feature.video.compressor.ui.navigation.directions.VideoCompressorStartDirectionProvider
 import com.example.feature.video.compressor.ui.presentation.VideoCompressorViewModel
 import com.example.feature.video.compressor.ui.presentation.screens.VideoCompressorResultScreen
-import com.example.feature.video.compressor.ui.presentation.screens.videocompressorsettings.VideoCompressorSettingsScreen
+import com.example.feature.video.compressor.ui.presentation.screens.videocompressorsettings.VideoCompressorSettingsRoute
 import com.example.feature.video.compressor.ui.presentation.screens.videocompressorstart.VideoCompressorRoute
 
 class CompressorNavigationGraph : FeatureNavGraph {
@@ -49,7 +49,7 @@ class CompressorNavigationGraph : FeatureNavGraph {
                     navController = navController,
                     backStackEntry = backStackEntry,
                 )
-                VideoCompressorSettingsScreen()
+                VideoCompressorSettingsRoute(viewModel)
             }
         }
     }

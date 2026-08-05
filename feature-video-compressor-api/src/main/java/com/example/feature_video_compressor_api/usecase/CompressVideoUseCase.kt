@@ -9,16 +9,10 @@ import kotlinx.coroutines.flow.Flow
 
 interface CompressVideoUseCase {
 
-    fun withPreset(
+    operator fun invoke(
         inputUri: Uri,
         outputFile: File,
         preset: CompressionPreset,
-    ): Flow<CompressionState>
-
-    fun withCustomSettings(
-        inputUri: Uri,
-        outputFile: File,
-        settings: CompressionSettings,
     ): Flow<CompressionState>
 
     fun cancel()
