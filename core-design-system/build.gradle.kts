@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core_desing_system"
+    namespace = "com.example.core_design_system"
 
     compileSdk {
         version = release(36)

@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.core_desing_system.theme.OfflineVideoCompressorTheme
+import com.example.core_design_system.theme.OfflineVideoCompressorTheme
 
 @Composable
 internal fun VideoHeroIllustration(

@@ -10,9 +10,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,17 +21,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
-import com.example.core_desing_system.theme.IconSecondary
-import com.example.core_desing_system.theme.Surface
-import com.example.core_desing_system.theme.SurfacePurple
+import com.example.core_design_system.theme.IconSecondary
+import com.example.core_design_system.theme.Surface
+import com.example.core_design_system.theme.SurfacePurple
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-internal fun SettingsButton(
+internal fun HeaderIconButton(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-){
+    content: @Composable () -> Unit,
+) {
     val interactionSource = remember { MutableInteractionSource() }
     val scope = rememberCoroutineScope()
 
@@ -64,6 +61,7 @@ internal fun SettingsButton(
         animationSpec = tween(durationMillis = 100),
         label = "settings_button_color",
     )
+
     Surface(
         onClick = {
             scope.launch {
@@ -75,7 +73,7 @@ internal fun SettingsButton(
             onClick()
         },
         interactionSource = interactionSource,
-        modifier = modifier
+        modifier = Modifier
             .size(46.dp)
             .graphicsLayer {
                 scaleX = scale
@@ -90,11 +88,7 @@ internal fun SettingsButton(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center,
         ) {
-            Icon(
-                imageVector = Icons.Outlined.Settings,
-                contentDescription = "Settings",
-                modifier = Modifier.size(26.dp),
-            )
+            content()
         }
     }
 }

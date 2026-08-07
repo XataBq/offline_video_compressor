@@ -38,7 +38,7 @@ sealed interface CompressionPreset {
     }
 
     data class Custom(
-        val settings: CompressionSettings
+        private val settings: CompressionSettings
     ) : CompressionPreset {
         override fun toSettings(): CompressionSettings {
             return settings

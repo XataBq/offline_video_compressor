@@ -1,4 +1,4 @@
-package com.example.core_desing_system.theme
+package com.example.core_design_system.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
@@ -6,7 +6,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.example.core_desing_system.R
+import com.example.core_design_system.R
 
 val InterFontFamily = FontFamily(
     Font(
@@ -75,5 +75,11 @@ val VideoCompressorTypography = Typography(
         fontFamily = InterFontFamily,
         fontSize = 18.sp,
         lineHeight = 22.sp
+    ),
+    labelMedium = TextStyle(
+        fontWeight = FontWeight.SemiBold,
+        fontFamily = InterFontFamily,
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
     )
 )

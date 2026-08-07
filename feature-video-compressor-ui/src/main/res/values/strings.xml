@@ -50,4 +50,113 @@
     <string name="cd_select_video">Выбрать видео</string>
     <string name="cd_arrow">Подробнее</string>
 
+    <!-- Compression settings screen -->
+    <string name="compression_settings_title">Настройки сжатия</string>
+    <string name="compression_settings_subtitle">Выберите параметры для сжатия видео</string>
+
+    <string name="compression_mode_title">Режим сжатия</string>
+
+    <!-- Presets -->
+    <string name="preset_balanced_title">Быстрый</string>
+    <string name="preset_balanced_description">Оптимальный баланс\nразмера и качества</string>
+    <string name="preset_balanced_savings">~60% меньше</string>
+
+    <string name="preset_max_quality_title">Высокое качество</string>
+    <string name="preset_max_quality_description">Лучшее качество\nпри умеренном сжатии</string>
+    <string name="preset_max_quality_savings">~30% меньше</string>
+
+    <string name="preset_strong_title">Максимальное сжатие</string>
+    <string name="preset_strong_description">Минимальный размер</string>
+    <string name="preset_strong_savings">~80% меньше</string>
+
+    <string name="preset_custom_title">Свои настройки</string>
+    <string name="preset_custom_description">Разрешение, FPS,\nкодек и качество</string>
+    <string name="preset_custom_label">Настроить</string>
+    <string name="preset_custom_selected_label">Выбрано</string>
+
+    <!-- Estimated size -->
+    <string name="estimated_size_title">Ожидаемый размер</string>
+    <string name="estimated_size_value">~%1$d MB</string>
+    <string name="estimated_size_description">
+    На %1$d%% меньше, чем оригинал (%2$d MB)
+</string>
+    <string name="savings_percent">%1$d%%</string>
+    <string name="savings_label">экономия</string>
+
+    <!-- Custom settings -->
+    <string name="custom_settings_title">Пользовательские настройки</string>
+    <string name="custom_settings_description">Разрешение, битрейт, FPS</string>
+
+    <!-- Compress -->
+    <string name="compress_video_button">Сжать видео</string>
+    <string name="compression_privacy_description">
+    Обработка выполняется на устройстве.\nВаши файлы в безопасности.
+</string>
+
+    <!-- Video metadata -->
+    <string name="video_resolution_format">%1$s</string>
+    <string name="video_frame_rate_format">%1$d fps</string>
+    <string name="video_file_size_format">%1$d MB</string>
+
+    <!-- Content descriptions -->
+    <string name="cd_back">Назад</string>
+    <string name="cd_help">Помощь</string>
+    <string name="cd_video_preview">Предпросмотр выбранного видео</string>
+    <string name="cd_play_video">Воспроизвести видео</string>
+    <string name="cd_selected_preset">Выбранный режим сжатия</string>
+    <string name="cd_custom_settings">Открыть пользовательские настройки</string>
+    <string name="cd_compress_video">Начать сжатие видео</string>
+
+    <!-- Custom compression settings -->
+    <string name="custom_screen_title">Пользовательские настройки</string>
+    <string name="custom_screen_subtitle">Точная настройка параметров сжатия видео</string>
+    <string name="custom_reset">Сбросить</string>
+
+    <!-- Resolution -->
+    <string name="custom_resolution_title">Разрешение</string>
+    <string name="custom_resolution_description">Ширина × высота видео</string>
+
+    <string name="resolution_1080">1920×1080\n(1080p)</string>
+    <string name="resolution_720">1280×720\n(720p)</string>
+    <string name="resolution_480">854×480\n(480p)</string>
+    <string name="resolution_360">640×360\n(360p)</string>
+
+    <!-- Frame rate -->
+    <string name="custom_fps_title">Кадры в секунду (FPS)</string>
+    <string name="custom_fps_description">Плавность движения видео</string>
+    <string name="value_fps">%1$d fps</string>
+
+    <!-- Quality -->
+    <string name="custom_quality_title">Качество</string>
+    <string name="custom_quality_description">Баланс размера файла и качества видео</string>
+
+    <string name="quality_max_compression">Макс. сжатие</string>
+    <string name="quality_low">Низкое</string>
+    <string name="quality_medium">Среднее</string>
+    <string name="quality_high">Высокое</string>
+    <string name="quality_max">Макс. качество</string>
+
+    <string name="custom_quality_smaller_size">Меньше размер</string>
+    <string name="custom_quality_better_quality">Лучше качество</string>
+
+    <!-- Codec -->
+    <string name="custom_codec_title">Формат и кодек</string>
+    <string name="custom_codec_description">Формат файла и метод кодирования</string>
+
+    <string name="custom_codec_h264">MP4 (H.264)</string>
+    <string name="custom_codec_h265">MP4 (H.265)</string>
+
+    <string name="custom_codec_h264_description">Совместимость</string>
+    <string name="custom_codec_h265_description">Меньше размер</string>
+
+    <!-- Common -->
+    <string name="value_original">Оригинал</string>
+
+    <!-- Hint -->
+    <string name="custom_hint_title">Что означают эти настройки?</string>
+    <string name="custom_hint_description">Чем ниже разрешение, FPS и качество — тем меньше размер файла. Но при этом может снижаться качество видео.</string>
+
+    <!-- Apply -->
+    <string name="custom_apply">Применить настройки</string>
+
 </resources>

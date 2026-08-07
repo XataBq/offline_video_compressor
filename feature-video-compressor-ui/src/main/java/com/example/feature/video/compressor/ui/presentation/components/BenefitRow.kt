@@ -21,12 +21,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.core_desing_system.theme.IconBackground
-import com.example.core_desing_system.theme.OfflineVideoCompressorTheme
-import com.example.core_desing_system.theme.PrimaryLight
-import com.example.core_desing_system.theme.TextPrimary
-import com.example.core_desing_system.theme.TextSecondary
-import com.example.core_desing_system.theme.VideoCompressorTypography
+import com.example.core_design_system.theme.IconBackground
+import com.example.core_design_system.theme.OfflineVideoCompressorTheme
+import com.example.core_design_system.theme.PrimaryLight
+import com.example.core_design_system.theme.TextPrimary
+import com.example.core_design_system.theme.TextSecondary
+import com.example.core_design_system.theme.VideoCompressorTypography
 import com.example.feature.video.compressor.ui.R
 
 @Composable

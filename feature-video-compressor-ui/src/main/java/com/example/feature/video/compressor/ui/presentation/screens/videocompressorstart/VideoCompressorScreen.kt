@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -16,6 +17,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AutoAwesome
 import androidx.compose.material.icons.outlined.Lock
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material.icons.outlined.WaterDrop
 import androidx.compose.material3.Card
@@ -33,18 +35,18 @@ import androidx.compose.ui.tooling.preview.Devices.PIXEL_7
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import com.example.core_desing_system.theme.OfflineVideoCompressorTheme
-import com.example.core_desing_system.theme.PrimaryLight
-import com.example.core_desing_system.theme.ShadowPurple
-import com.example.core_desing_system.theme.SurfaceLightPurple
-import com.example.core_desing_system.theme.SurfacePurple
-import com.example.core_desing_system.theme.TextPrimary
-import com.example.core_desing_system.theme.TextSecondary
-import com.example.core_desing_system.theme.VideoCompressorTypography
+import com.example.core_design_system.theme.OfflineVideoCompressorTheme
+import com.example.core_design_system.theme.PrimaryLight
+import com.example.core_design_system.theme.ShadowPurple
+import com.example.core_design_system.theme.SurfaceLightPurple
+import com.example.core_design_system.theme.SurfacePurple
+import com.example.core_design_system.theme.TextPrimary
+import com.example.core_design_system.theme.TextSecondary
+import com.example.core_design_system.theme.VideoCompressorTypography
 import com.example.feature.video.compressor.ui.R
 import com.example.feature.video.compressor.ui.presentation.components.BenefitRow
 import com.example.feature.video.compressor.ui.presentation.components.ChooseVideoButton
-import com.example.feature.video.compressor.ui.presentation.components.SettingsButton
+import com.example.feature.video.compressor.ui.presentation.components.HeaderIconButton
 import com.example.feature.video.compressor.ui.presentation.components.videoHeroIllustration.VideoHeroIllustration
 
 @Composable
@@ -73,7 +75,13 @@ internal fun VideoCompressorScreen(
                 style = VideoCompressorTypography.headlineLarge,
                 color = TextPrimary,
             )
-            SettingsButton(onSettingsClick)
+            HeaderIconButton(onSettingsClick) {
+                Icon(
+                    imageVector = Icons.Outlined.Settings,
+                    contentDescription = "Settings",
+                    modifier = Modifier.size(26.dp),
+                )
+            }
         }
         Text(
             text = stringResource(R.string.home_subtitle),

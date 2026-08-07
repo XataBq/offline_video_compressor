@@ -49,7 +49,11 @@ class CompressorNavigationGraph : FeatureNavGraph {
                     navController = navController,
                     backStackEntry = backStackEntry,
                 )
-                VideoCompressorSettingsRoute(viewModel)
+                VideoCompressorSettingsRoute(
+                    viewModel,
+                    navigateBack = { navController.popBackStack() },
+                    {},
+                    )
             }
         }
     }
