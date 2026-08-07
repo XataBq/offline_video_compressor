@@ -66,10 +66,12 @@ internal fun SavingsIndicator(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = stringResource(
-                    R.string.savings_percent,
-                    savingsPercent ?: "---",
-                ),
+                text = savingsPercent?.let {
+                    stringResource(
+                        R.string.savings_percent,
+                        savingsPercent,
+                    )
+                } ?: "---",
                 style = VideoCompressorTypography.titleMedium,
                 color = TextSecondary,
             )

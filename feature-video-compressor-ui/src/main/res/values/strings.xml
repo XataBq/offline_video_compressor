@@ -78,7 +78,7 @@
     <string name="estimated_size_title">Ожидаемый размер</string>
     <string name="estimated_size_value">~%1$d MB</string>
     <string name="estimated_size_description">
-    На %1$d%% меньше, чем оригинал (%2$d MB)
+    На %1$d%% меньше, чем оригинал (%2$.1f MB)
 </string>
     <string name="savings_percent">%1$d%%</string>
     <string name="savings_label">экономия</string>
@@ -96,7 +96,7 @@
     <!-- Video metadata -->
     <string name="video_resolution_format">%1$s</string>
     <string name="video_frame_rate_format">%1$d fps</string>
-    <string name="video_file_size_format">%1$d MB</string>
+    <string name="video_file_size_format">%1$.1f МБ</string>
 
     <!-- Content descriptions -->
     <string name="cd_back">Назад</string>

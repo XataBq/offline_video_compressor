@@ -34,6 +34,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.ui.compose)
     // Hilt DI (Dependency Injection) + интеграция с Compose + KSP компилятор
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)

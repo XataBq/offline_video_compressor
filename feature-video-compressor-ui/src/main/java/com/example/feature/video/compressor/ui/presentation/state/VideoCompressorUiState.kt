@@ -1,5 +1,6 @@
 package com.example.feature.video.compressor.ui.presentation.state
 
+import android.graphics.Bitmap
 import android.net.Uri
 import com.example.feature_video_compressor_api.model.CompressionPreset
 import com.example.feature_video_compressor_api.model.CompressionSettings
@@ -16,10 +17,12 @@ data class VideoCompressorUiState(
     val savingsPercent: Int? = null,
 
     val isCompressButtonEnabled: Boolean = true,
+    val videoPreview: Bitmap? = null,
 ) {
     val compressionSettings: CompressionSettings
         get() = compressionPreset.toSettings()
 
-    val originalSizeMb: Int?
-        get() = videoMetadata?.sizeBytes?.let { (it / 1024).toInt() }
+    val originalSizeMb: Double?
+        get() = videoMetadata?.sizeBytes
+            ?.let { it / (1024.0 * 1024.0) }
 }

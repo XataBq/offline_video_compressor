@@ -13,6 +13,7 @@ import com.example.feature_video_compressor_api.model.VideoFrameRate
 import com.example.feature_video_compressor_api.model.VideoResolution
 import com.example.feature_video_compressor_api.usecase.CompressVideoUseCase
 import com.example.feature_video_compressor_api.usecase.VideoMetadataReader
+import com.example.feature_video_compressor_api.usecase.VideoThumbnailProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,6 +29,7 @@ import kotlin.math.roundToLong
 internal class VideoCompressorViewModel @Inject constructor(
     private val compressVideoUseCase: CompressVideoUseCase,
     private val videoMetadataReader: VideoMetadataReader,
+    private val thumbnailProvider: VideoThumbnailProvider,
 ) : ViewModel() {
     private val _state = MutableStateFlow(VideoCompressorState.OnboardingScreen)
     val state = _state.asStateFlow()
@@ -66,7 +68,21 @@ internal class VideoCompressorViewModel @Inject constructor(
             Timber.d("videoMetadata updated")
 
             _news.send(VideoCompressorNews.NavigateCompressionSettings)
+
+            val videoPreview = thumbnailProvider.getThumbnail(
+                uri = uri,
+                timeMs = 3000L.let {
+                    val duration = uiState.value.videoMetadata?.durationMs
+                    if ( duration == null) it
+                    else minOf(duration, it)
+                }
+            )
+            _uiState.update { it.copy(videoPreview = videoPreview) }
+
+            recalculateEstimatedSize()
         }
+
+
     }
 
     fun onPresetSelected(
@@ -91,7 +107,7 @@ internal class VideoCompressorViewModel @Inject constructor(
 
     private fun recalculateEstimatedSize() {
         val state = _uiState.value
-        val originalSizeMb = state.videoMetadata?.sizeBytes?.let { it / 1024 }
+        val originalSizeMb = state.videoMetadata?.sizeBytes?.let { it / (1024.0 * 1024.0) }
 
         val savingsPercent = when (state.compressionPreset) {
             CompressionPreset.StrongCompression -> 80

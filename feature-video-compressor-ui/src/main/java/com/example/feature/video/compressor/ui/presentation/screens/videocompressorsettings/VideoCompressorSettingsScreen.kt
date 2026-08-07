@@ -71,6 +71,9 @@ internal fun VideoCompressorSettingsScreen(
     onCodecSelected: (VideoCodec) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    requireNotNull(state.uri) {
+        "VideoCompressorSettingsScreen requires selected video Uri"
+    }
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
