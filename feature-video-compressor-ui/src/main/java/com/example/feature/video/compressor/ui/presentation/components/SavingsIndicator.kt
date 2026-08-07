@@ -23,7 +23,7 @@ import com.example.feature.video.compressor.ui.R
 
 @Composable
 internal fun SavingsIndicator(
-    savingsPercent: Int,
+    savingsPercent: Int?,
 ) {
     Box(
         modifier = Modifier.size(80.dp),
@@ -53,7 +53,7 @@ internal fun SavingsIndicator(
                     ),
                 ),
                 startAngle = -90f,
-                sweepAngle = 360f * (savingsPercent / 100f),
+                sweepAngle = savingsPercent?.let { 360f * (it / 100f) } ?: 0f,
                 useCenter = false,
                 style = Stroke(
                     width = strokeWidth,
@@ -68,7 +68,7 @@ internal fun SavingsIndicator(
             Text(
                 text = stringResource(
                     R.string.savings_percent,
-                    savingsPercent,
+                    savingsPercent ?: "---",
                 ),
                 style = VideoCompressorTypography.titleMedium,
                 color = TextSecondary,

@@ -33,9 +33,9 @@ import com.example.feature.video.compressor.ui.R
 
 @Composable
 internal fun EstimatedSizeCard(
-    estimatedSizeMb: Long,
-    originalSizeMb: Long,
-    savingsPercent: Int,
+    estimatedSizeMb: Long?,
+    originalSizeMb: Int?,
+    savingsPercent: Int?,
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -86,7 +86,7 @@ internal fun EstimatedSizeCard(
                 Text(
                     text = stringResource(
                         R.string.estimated_size_value,
-                        estimatedSizeMb,
+                        estimatedSizeMb ?: "---",
                     ),
                     style = VideoCompressorTypography.headlineMedium,
                     color = Primary,
@@ -95,8 +95,8 @@ internal fun EstimatedSizeCard(
                 Text(
                     text = stringResource(
                         R.string.estimated_size_description,
-                        savingsPercent,
-                        originalSizeMb,
+                        savingsPercent ?: "---",
+                        originalSizeMb ?: "---",
                     ),
                     style = VideoCompressorTypography.bodySmall,
                     color = TextSecondary,

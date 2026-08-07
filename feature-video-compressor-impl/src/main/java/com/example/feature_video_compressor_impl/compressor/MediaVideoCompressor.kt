@@ -19,8 +19,8 @@ import com.example.feature_video_compressor_api.model.CompressionSettings
 import com.example.feature_video_compressor_api.model.CompressionState
 import com.example.feature_video_compressor_impl.calculator.CompressionSettingsResolver
 import com.example.feature_video_compressor_impl.calculator.ResolvedCompressionSettings
-import com.example.feature_video_compressor_impl.metadata.VideoMetadata
-import com.example.feature_video_compressor_impl.metadata.VideoMetadataReader
+import com.example.feature_video_compressor_api.model.VideoMetadata
+import com.example.feature_video_compressor_api.usecase.VideoMetadataReader
 import java.io.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
@@ -194,12 +194,20 @@ class Media3VideoCompressor @Inject constructor(
             }
 
             if (settings.shouldLimitFrameRate) {
-                add(
-                    FrameDropEffect.createSimpleFrameDropEffect(
-                        metadata.frameRate.toFloat(),
-                        settings.frameRate.toFloat(),
-                    ),
-                )
+                val sourceFrameRate = metadata.frameRate
+                val targetFrameRate = settings.frameRate
+
+                if (
+                    sourceFrameRate != null &&
+                    targetFrameRate != null
+                ) {
+                    add(
+                        FrameDropEffect.createSimpleFrameDropEffect(
+                            sourceFrameRate.toFloat(),
+                            targetFrameRate.toFloat(),
+                        ),
+                    )
+                }
             }
         }
     }

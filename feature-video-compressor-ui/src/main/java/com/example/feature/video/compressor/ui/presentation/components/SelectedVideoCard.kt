@@ -43,11 +43,17 @@ import com.example.core_design_system.theme.TextSecondary
 import com.example.core_design_system.theme.VideoCompressorTypography
 import com.example.feature.video.compressor.ui.R
 import com.example.feature.video.compressor.ui.presentation.state.VideoCompressorUiState
+import com.example.feature.video.compressor.ui.utils.formatDuration
 
 @Composable
 internal fun SelectedVideoCard(
     state: VideoCompressorUiState,
 ) {
+    val duration = state.videoMetadata
+        ?.durationMs
+        ?.formatDuration()
+        .orEmpty()
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -69,7 +75,7 @@ internal fun SelectedVideoCard(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             VideoPreview(
-                duration = state.duration,
+                duration = duration,
             )
 
             Row(
@@ -84,7 +90,7 @@ internal fun SelectedVideoCard(
                 )
 
                 Text(
-                    text = state.fileName,
+                    text = state.videoMetadata?.fileName ?: "",
                     style = VideoCompressorTypography.titleMedium,
                     color = TextPrimary,
                     maxLines = 1,
@@ -93,8 +99,8 @@ internal fun SelectedVideoCard(
             }
 
             VideoMetadataRow(
-                resolution = state.resolution,
-                frameRate = state.frameRate,
+                resolution = "${state.videoMetadata?.width}x${state.videoMetadata?.height}",
+                frameRate = state.videoMetadata?.frameRate,
                 sizeMb = state.originalSizeMb,
             )
         }
@@ -161,9 +167,9 @@ private fun VideoPreview(
 
 @Composable
 private fun VideoMetadataRow(
-    resolution: String,
-    frameRate: Int,
-    sizeMb: Long,
+    resolution: String?,
+    frameRate: Int?,
+    sizeMb: Int?,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -179,7 +185,7 @@ private fun VideoMetadataRow(
             },
             text = stringResource(
                 R.string.video_resolution_format,
-                resolution,
+                resolution ?: "---",
             ),
         )
 
@@ -194,7 +200,7 @@ private fun VideoMetadataRow(
             },
             text = stringResource(
                 R.string.video_frame_rate_format,
-                frameRate,
+                frameRate ?: "---",
             ),
         )
 
@@ -209,7 +215,7 @@ private fun VideoMetadataRow(
             },
             text = stringResource(
                 R.string.video_file_size_format,
-                sizeMb,
+                sizeMb ?: "---",
             ),
         )
     }

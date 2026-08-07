@@ -7,7 +7,7 @@ import com.example.feature_video_compressor_impl.compressor.Media3VideoCompresso
 import com.example.feature_video_compressor_impl.compressor.VideoCompressor
 import com.example.feature_video_compressor_impl.domain.DefaultCompressVideoUseCase
 import com.example.feature_video_compressor_impl.metadata.AndroidVideoMetadataReader
-import com.example.feature_video_compressor_impl.metadata.VideoMetadataReader
+import com.example.feature_video_compressor_api.usecase.VideoMetadataReader
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

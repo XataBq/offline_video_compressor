@@ -12,6 +12,7 @@ import com.example.feature_video_compressor_api.model.VideoCodec
 import com.example.feature_video_compressor_api.model.VideoFrameRate
 import com.example.feature_video_compressor_api.model.VideoResolution
 import com.example.feature_video_compressor_api.usecase.CompressVideoUseCase
+import com.example.feature_video_compressor_api.usecase.VideoMetadataReader
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,7 +26,8 @@ import kotlin.math.roundToLong
 
 @HiltViewModel
 internal class VideoCompressorViewModel @Inject constructor(
-    private val compressVideoUseCase: CompressVideoUseCase
+    private val compressVideoUseCase: CompressVideoUseCase,
+    private val videoMetadataReader: VideoMetadataReader,
 ) : ViewModel() {
     private val _state = MutableStateFlow(VideoCompressorState.OnboardingScreen)
     val state = _state.asStateFlow()
@@ -56,6 +58,13 @@ internal class VideoCompressorViewModel @Inject constructor(
         }
         Timber.d("Video was chosen")
         viewModelScope.launch {
+            _uiState.update {
+                it.copy(
+                    videoMetadata = videoMetadataReader.read(uri)
+                )
+            }
+            Timber.d("videoMetadata updated")
+
             _news.send(VideoCompressorNews.NavigateCompressionSettings)
         }
     }
@@ -82,7 +91,7 @@ internal class VideoCompressorViewModel @Inject constructor(
 
     private fun recalculateEstimatedSize() {
         val state = _uiState.value
-        val originalSizeMb = state.originalSizeMb
+        val originalSizeMb = state.videoMetadata?.sizeBytes?.let { it / 1024 }
 
         val savingsPercent = when (state.compressionPreset) {
             CompressionPreset.StrongCompression -> 80
@@ -91,9 +100,9 @@ internal class VideoCompressorViewModel @Inject constructor(
             is CompressionPreset.Custom -> 45
         }
 
-        val estimatedSizeMb = (
-            originalSizeMb * (100 - savingsPercent) / 100f
-            ).roundToLong()
+        val estimatedSizeMb = originalSizeMb?.let {
+            (it * (100 - savingsPercent) / 100f).roundToLong()
+        }
 
         _uiState.update {
             it.copy(
