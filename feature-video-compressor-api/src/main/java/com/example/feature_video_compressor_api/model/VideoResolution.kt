@@ -4,7 +4,7 @@ sealed interface VideoResolution {
 
     data object Original : VideoResolution
 
-    data class TargetHeight(
-        val height: Int,
+    data class TargetShortSide(
+        val pixels: Int,
     ) : VideoResolution
 }

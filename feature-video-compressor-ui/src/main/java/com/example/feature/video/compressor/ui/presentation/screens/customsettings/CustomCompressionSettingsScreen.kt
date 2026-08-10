@@ -63,11 +63,13 @@ import com.example.feature_video_compressor_api.model.CompressionQuality
 import com.example.feature_video_compressor_api.model.CompressionSettings
 import com.example.feature_video_compressor_api.model.VideoCodec
 import com.example.feature_video_compressor_api.model.VideoFrameRate
+import com.example.feature_video_compressor_api.model.VideoMetadata
 import com.example.feature_video_compressor_api.model.VideoResolution
 import kotlin.math.roundToInt
 
 @Composable
 internal fun CustomCompressionSettingsScreen(
+    metadata: VideoMetadata?,
     settings: CompressionSettings,
     onResetClick: () -> Unit,
     onResolutionSelected: (VideoResolution) -> Unit,
@@ -95,6 +97,7 @@ internal fun CustomCompressionSettingsScreen(
 
         item {
             ResolutionSettingsCard(
+                metadata = metadata,
                 selectedResolution = settings.resolution,
                 onResolutionSelected = onResolutionSelected,
             )
@@ -102,6 +105,7 @@ internal fun CustomCompressionSettingsScreen(
 
         item {
             FrameRateSettingsCard(
+                metadata = metadata,
                 selectedFrameRate = settings.frameRate,
                 onFrameRateSelected = onFrameRateSelected,
             )
@@ -193,16 +197,11 @@ private fun CustomSettingsHeader(
 
 @Composable
 private fun ResolutionSettingsCard(
+    metadata: VideoMetadata?,
     selectedResolution: VideoResolution,
     onResolutionSelected: (VideoResolution) -> Unit,
 ) {
-    val options = listOf(
-        VideoResolution.TargetHeight(1080),
-        VideoResolution.TargetHeight(720),
-        VideoResolution.TargetHeight(480),
-        VideoResolution.TargetHeight(360),
-        VideoResolution.Original,
-    )
+    val options = availableResolutions(metadata)
 
     SettingsCard {
         SettingsSectionHeader(
@@ -237,15 +236,11 @@ private fun ResolutionSettingsCard(
 
 @Composable
 private fun FrameRateSettingsCard(
+    metadata: VideoMetadata?,
     selectedFrameRate: VideoFrameRate,
     onFrameRateSelected: (VideoFrameRate) -> Unit,
 ) {
-    val options = listOf(
-        VideoFrameRate.Limited(60),
-        VideoFrameRate.Limited(30),
-        VideoFrameRate.Limited(24),
-        VideoFrameRate.Original,
-    )
+    val options = availableFrameRates(metadata?.frameRate)
 
     SettingsCard {
         SettingsSectionHeader(
@@ -639,18 +634,12 @@ private fun resolutionLabel(
     resolution: VideoResolution,
 ): String {
     return when (resolution) {
-        is VideoResolution.TargetHeight -> {
-            when (resolution.height) {
-                1080 -> stringResource(R.string.resolution_1080)
-                720 -> stringResource(R.string.resolution_720)
-                480 -> stringResource(R.string.resolution_480)
-                360 -> stringResource(R.string.resolution_360)
-                else -> "${resolution.height}p"
-            }
-        }
-
         VideoResolution.Original -> {
             stringResource(R.string.value_original)
+        }
+
+        is VideoResolution.TargetShortSide -> {
+            "${resolution.pixels}p"
         }
     }
 }
@@ -673,6 +662,62 @@ private fun frameRateLabel(
     }
 }
 
+private fun availableResolutions(
+    metadata: VideoMetadata?,
+): List<VideoResolution> {
+
+    metadata ?: return listOf(VideoResolution.Original)
+
+    val sourceShortSide = minOf(
+        metadata.width,
+        metadata.height,
+    )
+
+    return buildList {
+        if (sourceShortSide > 1080) {
+            add(VideoResolution.TargetShortSide(1080))
+        }
+
+        if (sourceShortSide > 720) {
+            add(VideoResolution.TargetShortSide(720))
+        }
+
+        if (sourceShortSide > 480) {
+            add(VideoResolution.TargetShortSide(480))
+        }
+
+        if (sourceShortSide > 360) {
+            add(VideoResolution.TargetShortSide(360))
+        }
+
+        add(VideoResolution.Original)
+    }
+}
+
+private fun availableFrameRates(
+    sourceFrameRate: Int?,
+): List<VideoFrameRate> {
+    return buildList {
+        add(VideoFrameRate.Original)
+
+        if (sourceFrameRate == null) {
+            return@buildList
+        }
+
+        if (sourceFrameRate > 60) {
+            add(VideoFrameRate.Limited(60))
+        }
+
+        if (sourceFrameRate > 30) {
+            add(VideoFrameRate.Limited(30))
+        }
+
+        if (sourceFrameRate > 24) {
+            add(VideoFrameRate.Limited(24))
+        }
+    }
+}
+
 @Preview(
     showBackground = true,
     showSystemUi = true,
@@ -681,8 +726,17 @@ private fun frameRateLabel(
 @Composable
 private fun CustomCompressionSettingsScreenPreview() {
     CustomCompressionSettingsScreen(
+        metadata = VideoMetadata(
+            width = 1080,
+            height = 720,
+            frameRate = 29,
+            bitrate = 8000,
+            durationMs = 500000,
+            sizeBytes = 29000000,
+            fileName = "Landscape",
+        ),
         settings = CompressionSettings(
-            resolution = VideoResolution.TargetHeight(720),
+            resolution = VideoResolution.TargetShortSide(720),
             frameRate = VideoFrameRate.Limited(30),
             quality = CompressionQuality.MEDIUM,
             codec = VideoCodec.H264,

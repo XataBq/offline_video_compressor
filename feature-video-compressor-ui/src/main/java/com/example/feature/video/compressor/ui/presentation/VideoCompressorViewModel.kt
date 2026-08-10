@@ -60,15 +60,14 @@ internal class VideoCompressorViewModel @Inject constructor(
         }
         Timber.d("Video was chosen")
         viewModelScope.launch {
+            _news.send(VideoCompressorNews.NavigateCompressionSettings)
+
             _uiState.update {
                 it.copy(
                     videoMetadata = videoMetadataReader.read(uri)
                 )
             }
             Timber.d("videoMetadata updated")
-
-            _news.send(VideoCompressorNews.NavigateCompressionSettings)
-
             val videoPreview = thumbnailProvider.getThumbnail(
                 uri = uri,
                 timeMs = 3000L.let {

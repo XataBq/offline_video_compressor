@@ -19,46 +19,56 @@ class VideoSizeCalculator @Inject constructor() {
                 )
             }
 
-            is VideoResolution.TargetHeight -> {
-                calculateForHeight(
-                    originalWidth = metadata.width,
-                    originalHeight = metadata.height,
-                    targetHeight = resolution.height,
+            is VideoResolution.TargetShortSide -> {
+                calculateTargetSize(
+                    sourceWidth = metadata.width,
+                    sourceHeight = metadata.height,
+                    targetShortSide = resolution.pixels,
                 )
             }
         }
     }
 
-    private fun calculateForHeight(
-        originalWidth: Int,
-        originalHeight: Int,
-        targetHeight: Int,
+    private fun calculateTargetSize(
+        sourceWidth: Int,
+        sourceHeight: Int,
+        targetShortSide: Int,
     ): VideoSize {
-        if (originalWidth <= 0 || originalHeight <= 0) {
-            throw IllegalArgumentException("Некорректный размер исходного видео")
-        }
+        val sourceShortSide = minOf(
+            sourceWidth,
+            sourceHeight,
+        )
 
-        /*
-         * Не увеличиваем видео.
-         * Если исходник 480p, выбор 1080p не должен растягивать его.
-         */
-        if (originalHeight <= targetHeight) {
+        // Никогда не увеличиваем разрешение.
+        if (targetShortSide >= sourceShortSide) {
             return VideoSize(
-                width = makeEven(originalWidth),
-                height = makeEven(originalHeight),
+                width = sourceWidth,
+                height = sourceHeight,
             )
         }
 
-        val aspectRatio = originalWidth.toDouble() / originalHeight
-        val calculatedWidth = (targetHeight * aspectRatio).roundToInt()
+        val scale = targetShortSide.toDouble() /
+            sourceShortSide.toDouble()
+
+        val targetWidth = (sourceWidth * scale)
+            .roundToInt()
+            .makeEven()
+
+        val targetHeight = (sourceHeight * scale)
+            .roundToInt()
+            .makeEven()
 
         return VideoSize(
-            width = makeEven(calculatedWidth),
-            height = makeEven(targetHeight),
+            width = targetWidth,
+            height = targetHeight,
         )
     }
 
-    private fun makeEven(value: Int): Int {
-        return if (value % 2 == 0) value else value - 1
+    private fun Int.makeEven(): Int {
+        return if (this % 2 == 0) {
+            this
+        } else {
+            this - 1
+        }
     }
 }

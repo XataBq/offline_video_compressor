@@ -7,7 +7,7 @@ sealed interface CompressionPreset {
     data object StrongCompression : CompressionPreset {
         override fun toSettings(): CompressionSettings {
             return CompressionSettings(
-                resolution = VideoResolution.TargetHeight(480),
+                resolution = VideoResolution.TargetShortSide(480),
                 frameRate = VideoFrameRate.Limited(24),
                 quality = CompressionQuality.MAX_COMPRESSION,
                 codec = VideoCodec.H264,
@@ -18,7 +18,7 @@ sealed interface CompressionPreset {
     data object Balanced : CompressionPreset {
         override fun toSettings(): CompressionSettings {
             return CompressionSettings(
-                resolution = VideoResolution.TargetHeight(720),
+                resolution = VideoResolution.TargetShortSide(720),
                 frameRate = VideoFrameRate.Limited(30),
                 quality = CompressionQuality.MEDIUM,
                 codec = VideoCodec.H264,

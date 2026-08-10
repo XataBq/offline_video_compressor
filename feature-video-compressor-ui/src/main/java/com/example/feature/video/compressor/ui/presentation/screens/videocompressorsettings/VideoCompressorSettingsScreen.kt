@@ -52,6 +52,7 @@ import com.example.feature_video_compressor_api.model.CompressionQuality
 import com.example.feature_video_compressor_api.model.CompressionSettings
 import com.example.feature_video_compressor_api.model.VideoCodec
 import com.example.feature_video_compressor_api.model.VideoFrameRate
+import com.example.feature_video_compressor_api.model.VideoMetadata
 import com.example.feature_video_compressor_api.model.VideoResolution
 
 @Composable
@@ -129,6 +130,7 @@ internal fun VideoCompressorSettingsScreen(
     }
 
     CustomSettingsBottomSheet(
+        metadata = state.videoMetadata,
         settings = state.compressionSettings,
         openBottomSheet = bottomSheetOpened,
         onDismissRequest = onDismissRequest,
@@ -294,6 +296,7 @@ private fun CompressionPresetsSection(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun CustomSettingsBottomSheet(
+    metadata: VideoMetadata?,
     settings: CompressionSettings,
     openBottomSheet: Boolean,
     onDismissRequest: () -> Unit,
@@ -316,6 +319,7 @@ internal fun CustomSettingsBottomSheet(
         modifier = modifier.fillMaxSize(),
     ) {
         CustomCompressionSettingsScreen(
+            metadata = metadata,
             settings = settings,
             onResetClick = onResetClick,
             onResolutionSelected = onResolutionSelected,
