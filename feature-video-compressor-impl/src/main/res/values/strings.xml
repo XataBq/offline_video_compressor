@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Compression notification -->
+    <string name="compression_notification_channel_name">Сжатие видео</string>
+    <string name="compression_notification_channel_description">
+    Прогресс сжатия выбранного видео
+</string>
+
+    <string name="compression_notification_title">Сжатие видео</string>
+    <string name="compression_notification_preparing">Подготовка видео…</string>
+    <string name="compression_notification_progress">Сжато %1$d%%</string>
+    <string name="compression_notification_cancel">Отмена</string>
+
+    <string name="compression_notification_completed_title">Видео сжато</string>
+
+    <string name="compression_notification_failed_title">Не удалось сжать видео</string>
+    <string name="compression_notification_failed_description">
+    Во время обработки произошла ошибка
+</string>
+    <string name="compression_notification_completed_description">Completed\n</string>
+</resources>

@@ -1,21 +1,18 @@
 package com.example.feature_video_compressor_api.model
 
-import java.io.File
-
 sealed interface CompressionState {
 
     data object Idle : CompressionState
 
-    data class Preparing(
-        val inputUri: android.net.Uri,
-    ) : CompressionState
+    data object Preparing : CompressionState
 
     data class Compressing(
         val progress: Int,
+        val remainingTimeMs: Long?,
     ) : CompressionState
 
     data class Completed(
-        val outputFile: java.io.File,
+        val outputLocation: VideoLocation,
         val originalSizeBytes: Long?,
         val compressedSizeBytes: Long,
     ) : CompressionState
@@ -26,3 +23,8 @@ sealed interface CompressionState {
 
     data object Cancelled : CompressionState
 }
+
+@JvmInline
+value class VideoLocation(
+    val value: String,
+)

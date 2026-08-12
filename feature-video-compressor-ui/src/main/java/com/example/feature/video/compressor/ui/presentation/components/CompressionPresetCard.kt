@@ -161,6 +161,7 @@ internal fun CompressionPresetCard(
 internal fun PresetGradientIcon(
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     colors: List<Color>,
+    contentDescription: String? = null,
 ) {
     Box(
         modifier = Modifier
@@ -173,7 +174,7 @@ internal fun PresetGradientIcon(
     ) {
         Icon(
             imageVector = icon,
-            contentDescription = null,
+            contentDescription = contentDescription,
             tint = Color.White,
             modifier = Modifier.size(24.dp),
         )

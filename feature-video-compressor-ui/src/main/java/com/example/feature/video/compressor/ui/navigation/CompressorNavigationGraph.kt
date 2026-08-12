@@ -11,11 +11,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.example.core_navigation_api.domain.FeatureNavGraph
 import com.example.core_navigation_api.domain.StartDirectionProvider
+import com.example.feature.video.compressor.ui.navigation.directions.VideoCompressionProgressDirection
 import com.example.feature.video.compressor.ui.navigation.directions.VideoCompressorResultDirection
 import com.example.feature.video.compressor.ui.navigation.directions.VideoCompressorSettingsDirection
 import com.example.feature.video.compressor.ui.navigation.directions.VideoCompressorStartDirectionProvider
 import com.example.feature.video.compressor.ui.presentation.VideoCompressorViewModel
 import com.example.feature.video.compressor.ui.presentation.screens.VideoCompressorResultScreen
+import com.example.feature.video.compressor.ui.presentation.screens.compressionprogress.VideoCompressionProgressRoute
 import com.example.feature.video.compressor.ui.presentation.screens.videocompressorsettings.VideoCompressorSettingsRoute
 import com.example.feature.video.compressor.ui.presentation.screens.videocompressorstart.VideoCompressorRoute
 
@@ -52,8 +54,22 @@ class CompressorNavigationGraph : FeatureNavGraph {
                 VideoCompressorSettingsRoute(
                     viewModel,
                     navigateBack = { navController.popBackStack() },
-                    {},
+                    navigateCompressionProgress = {
+                        navController.navigate(VideoCompressionProgressDirection.screenName)
+                    },
+                    navigateHelp = {},
                     )
+            }
+            composable(VideoCompressionProgressDirection.screenName) { backStackEntry ->
+                val viewModel = sharedGraphViewModel<VideoCompressorViewModel>(
+                    navController = navController,
+                    backStackEntry = backStackEntry
+                )
+                VideoCompressionProgressRoute(
+                    viewModel = viewModel,
+                    navigateBack = { navController.popBackStack() },
+                    navigateHelp = {},
+                )
             }
         }
     }

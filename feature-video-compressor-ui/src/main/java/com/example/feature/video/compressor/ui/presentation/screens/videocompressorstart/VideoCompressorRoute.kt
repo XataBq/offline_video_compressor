@@ -43,6 +43,7 @@ internal fun VideoCompressorRoute(
                             )
                         )
                     }
+                    else -> Unit
                 }
             }
         }

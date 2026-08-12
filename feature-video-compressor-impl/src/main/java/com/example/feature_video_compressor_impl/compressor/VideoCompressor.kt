@@ -12,7 +12,7 @@ internal interface VideoCompressor {
         inputUri: Uri,
         outputFile: File,
         settings: CompressionSettings,
-    ): Flow<CompressionState>
+    ): Flow<VideoCompressionState>
 
     fun cancel()
 }

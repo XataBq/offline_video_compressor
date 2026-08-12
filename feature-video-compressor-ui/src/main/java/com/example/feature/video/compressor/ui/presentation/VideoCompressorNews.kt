@@ -1,7 +1,19 @@
 package com.example.feature.video.compressor.ui.presentation
 
 internal sealed interface VideoCompressorNews {
-    object NavigateSettings : VideoCompressorNews
-    object NavigateCompressionSettings : VideoCompressorNews
-    object OpenVideoPicker : VideoCompressorNews
+
+    data object NavigateSettings :
+        VideoCompressorNews
+
+    data object NavigateCompressionSettings :
+        VideoCompressorNews
+
+    data object NavigateCompressionProgress :
+        VideoCompressorNews
+
+    data object NavigateCompressionResult :
+        VideoCompressorNews
+
+    data object OpenVideoPicker :
+        VideoCompressorNews
 }

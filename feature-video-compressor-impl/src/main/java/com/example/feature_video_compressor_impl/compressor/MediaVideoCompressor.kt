@@ -30,12 +30,15 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import android.media.MediaCodecInfo.EncoderCapabilities.BITRATE_MODE_VBR
+import androidx.media3.transformer.Composition
 import com.example.feature_video_compressor_impl.mappers.toMimeType
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.withContext
+import java.io.IOException
 import javax.inject.Inject
 
 @UnstableApi
-class Media3VideoCompressor @Inject constructor(
+internal class Media3VideoCompressor @Inject constructor(
     @ApplicationContext
     private val context: Context,
     private val metadataReader: VideoMetadataReader,
@@ -48,13 +51,23 @@ class Media3VideoCompressor @Inject constructor(
         inputUri: Uri,
         outputFile: File,
         settings: CompressionSettings,
-    ): Flow<CompressionState> = callbackFlow {
-        trySend(CompressionState.Preparing(inputUri))
+    ): Flow<VideoCompressionState> = callbackFlow {
+
+        trySend(
+            VideoCompressionState.Preparing,
+        )
 
         val metadata = try {
-            metadataReader.read(inputUri)
+            withContext(Dispatchers.IO) {
+                metadataReader.read(inputUri)
+            }
         } catch (throwable: Throwable) {
-            trySend(CompressionState.Failed(throwable))
+            trySend(
+                VideoCompressionState.Failed(
+                    throwable = throwable,
+                ),
+            )
+
             close()
             return@callbackFlow
         }
@@ -65,15 +78,29 @@ class Media3VideoCompressor @Inject constructor(
                 settings = settings,
             )
         } catch (throwable: Throwable) {
-            trySend(CompressionState.Failed(throwable))
+            trySend(
+                VideoCompressionState.Failed(
+                    throwable = throwable,
+                ),
+            )
+
             close()
             return@callbackFlow
         }
 
-        outputFile.parentFile?.mkdirs()
+        try {
+            prepareOutputFile(
+                outputFile = outputFile,
+            )
+        } catch (throwable: Throwable) {
+            trySend(
+                VideoCompressionState.Failed(
+                    throwable = throwable,
+                ),
+            )
 
-        if (outputFile.exists()) {
-            outputFile.delete()
+            close()
+            return@callbackFlow
         }
 
         val effects = createEffects(
@@ -81,95 +108,180 @@ class Media3VideoCompressor @Inject constructor(
             settings = resolvedSettings,
         )
 
-        val editedMediaItem = EditedMediaItem.Builder(
-            MediaItem.fromUri(inputUri),
-        )
-            .setRemoveAudio(!resolvedSettings.keepAudio)
-            .setEffects(
-                Effects(
-                    emptyList(),
-                    effects,
-                ),
+        val editedMediaItem =
+            EditedMediaItem.Builder(
+                MediaItem.fromUri(inputUri),
             )
-            .build()
-
-        val videoEncoderSettings = VideoEncoderSettings.Builder()
-            .setBitrate(resolvedSettings.bitrate)
-            .setBitrateMode(BITRATE_MODE_VBR)
-            .build()
-
-        val encoderFactory = DefaultEncoderFactory.Builder(context)
-            .setRequestedVideoEncoderSettings(videoEncoderSettings)
-            .build()
-
-        val listener = object : Transformer.Listener {
-
-            override fun onCompleted(
-                composition: androidx.media3.transformer.Composition,
-                exportResult: ExportResult,
-            ) {
-                trySend(
-                    CompressionState.Completed(
-                        outputFile = outputFile,
-                        originalSizeBytes = getInputSize(inputUri),
-                        compressedSizeBytes = outputFile.length(),
+                .setRemoveAudio(
+                    !resolvedSettings.keepAudio,
+                )
+                .setEffects(
+                    Effects(
+                        emptyList(),
+                        effects,
                     ),
                 )
+                .build()
 
-                close()
-            }
-
-            override fun onError(
-                composition: androidx.media3.transformer.Composition,
-                exportResult: ExportResult,
-                exportException: ExportException,
-            ) {
-                trySend(
-                    CompressionState.Failed(exportException),
+        val videoEncoderSettings =
+            VideoEncoderSettings.Builder()
+                .setBitrate(
+                    resolvedSettings.bitrate,
                 )
+                .build()
 
-                close(exportException)
+        val encoderFactory =
+            DefaultEncoderFactory.Builder(
+                context,
+            )
+                .setRequestedVideoEncoderSettings(
+                    videoEncoderSettings,
+                )
+                .build()
+
+        val listener =
+            object : Transformer.Listener {
+
+                override fun onCompleted(
+                    composition: Composition,
+                    exportResult: ExportResult,
+                ) {
+                    trySend(
+                        VideoCompressionState.Completed(
+                            originalSizeBytes =
+                                metadata.sizeBytes,
+                            compressedSizeBytes =
+                                outputFile.length(),
+                        ),
+                    )
+
+                    close()
+                }
+
+                override fun onError(
+                    composition: Composition,
+                    exportResult: ExportResult,
+                    exportException: ExportException,
+                ) {
+                    trySend(
+                        VideoCompressionState.Failed(
+                            throwable =
+                                exportException,
+                        ),
+                    )
+
+                    /*
+                     * Здесь специально close(), а не
+                     * close(exportException).
+                     *
+                     * Failed уже отправлен как state.
+                     * Если закрыть Flow с exception,
+                     * Service после Failed дополнительно
+                     * попадёт в catch и обработает одну
+                     * ошибку второй раз.
+                     */
+                    close()
+                }
             }
-        }
 
-        val transformer = Transformer.Builder(context)
-            .setVideoMimeType(resolvedSettings.codec.toMimeType())
-            .setEncoderFactory(encoderFactory)
-            .addListener(listener)
-            .build()
+        val transformer =
+            Transformer.Builder(context)
+                .setVideoMimeType(
+                    resolvedSettings.codec.toMimeType(),
+                )
+                .setEncoderFactory(
+                    encoderFactory,
+                )
+                .addListener(
+                    listener,
+                )
+                .build()
 
         currentTransformer = transformer
 
-        transformer.start(
-            editedMediaItem,
-            outputFile.absolutePath,
-        )
+        try {
+            transformer.start(
+                editedMediaItem,
+                outputFile.absolutePath,
+            )
+        } catch (throwable: Throwable) {
+            if (
+                currentTransformer === transformer
+            ) {
+                currentTransformer = null
+            }
 
-        val progressJob = launch(Dispatchers.Default) {
-            val progressHolder = ProgressHolder()
+            trySend(
+                VideoCompressionState.Failed(
+                    throwable = throwable,
+                ),
+            )
 
-            while (isActive) {
-                val progressState = transformer.getProgress(progressHolder)
+            close()
+            return@callbackFlow
+        }
 
-                if (
-                    progressState ==
-                    Transformer.PROGRESS_STATE_AVAILABLE
-                ) {
-                    trySend(
-                        CompressionState.Compressing(
-                            progress = progressHolder.progress,
-                        ),
+        /*
+         * Transformer должен использоваться с одного
+         * application thread.
+         *
+         * Service собирает этот Flow на Main.immediate,
+         * поэтому progress также запрашиваем на Main,
+         * а не на Dispatchers.Default.
+         */
+        val progressJob =
+            launch(Dispatchers.Main.immediate) {
+                val progressHolder =
+                    ProgressHolder()
+
+                var lastProgress = -1
+
+                while (isActive) {
+                    val progressState =
+                        transformer.getProgress(
+                            progressHolder,
+                        )
+
+                    if (
+                        progressState ==
+                        Transformer.PROGRESS_STATE_AVAILABLE
+                    ) {
+                        val progress =
+                            progressHolder.progress
+                                .coerceIn(
+                                    0,
+                                    100,
+                                )
+
+                        /*
+                         * Не отправляем один и тот же
+                         * процент каждые 250 мс.
+                         */
+                        if (
+                            progress != lastProgress
+                        ) {
+                            lastProgress = progress
+
+                            trySend(
+                                VideoCompressionState.Compressing(
+                                    progress = progress,
+                                ),
+                            )
+                        }
+                    }
+
+                    delay(
+                        PROGRESS_UPDATE_INTERVAL_MS,
                     )
                 }
-
-                delay(PROGRESS_UPDATE_INTERVAL_MS)
             }
-        }
 
         awaitClose {
             progressJob.cancel()
 
-            if (currentTransformer === transformer) {
+            if (
+                currentTransformer === transformer
+            ) {
                 currentTransformer = null
             }
         }
@@ -185,42 +297,86 @@ class Media3VideoCompressor @Inject constructor(
         settings: ResolvedCompressionSettings,
     ): List<Effect> {
         return buildList {
+
             if (settings.shouldResize) {
-                add(
-                    Presentation.createForHeight(
+                val targetShortSide =
+                    minOf(
+                        settings.width,
                         settings.height,
-                    ),
+                    )
+
+                add(
+                    Presentation
+                        .createForShortSide(
+                            targetShortSide,
+                        )
+                        .copyWithUnsetSideRoundedTo(
+                            VIDEO_SIZE_DIVISOR,
+                        ),
                 )
             }
 
-            if (settings.shouldLimitFrameRate) {
-                val sourceFrameRate = metadata.frameRate
-                val targetFrameRate = settings.frameRate
+            if (
+                settings.shouldLimitFrameRate
+            ) {
+                val sourceFrameRate =
+                    metadata.frameRate
+
+                val targetFrameRate =
+                    settings.frameRate
 
                 if (
                     sourceFrameRate != null &&
                     targetFrameRate != null
                 ) {
                     add(
-                        FrameDropEffect.createSimpleFrameDropEffect(
-                            sourceFrameRate.toFloat(),
-                            targetFrameRate.toFloat(),
-                        ),
+                        FrameDropEffect
+                            .createSimpleFrameDropEffect(
+                                sourceFrameRate.toFloat(),
+                                targetFrameRate.toFloat(),
+                            ),
                     )
                 }
             }
         }
     }
 
-    private fun getInputSize(uri: Uri): Long? {
-        return context.contentResolver
-            .openAssetFileDescriptor(uri, "r")
-            ?.use { descriptor ->
-                descriptor.length.takeIf { it >= 0 }
+    private suspend fun prepareOutputFile(
+        outputFile: File,
+    ) {
+        withContext(Dispatchers.IO) {
+            val parentDirectory =
+                outputFile.parentFile
+
+            if (
+                parentDirectory != null &&
+                !parentDirectory.exists() &&
+                !parentDirectory.mkdirs()
+            ) {
+                throw IOException(
+                    "Failed to create output directory: " +
+                        parentDirectory.absolutePath,
+                )
             }
+
+            if (
+                outputFile.exists() &&
+                !outputFile.delete()
+            ) {
+                throw IOException(
+                    "Failed to delete existing output file: " +
+                        outputFile.absolutePath,
+                )
+            }
+        }
     }
 
     private companion object {
-        const val PROGRESS_UPDATE_INTERVAL_MS = 250L
+
+        const val PROGRESS_UPDATE_INTERVAL_MS =
+            250L
+
+        const val VIDEO_SIZE_DIVISOR =
+            2
     }
 }

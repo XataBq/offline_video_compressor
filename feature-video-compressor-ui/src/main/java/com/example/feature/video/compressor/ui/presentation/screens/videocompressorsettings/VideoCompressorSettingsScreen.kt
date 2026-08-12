@@ -1,5 +1,6 @@
 package com.example.feature.video.compressor.ui.presentation.screens.videocompressorsettings
 
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,23 +8,18 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.ArrowBack
-import androidx.compose.material.icons.automirrored.outlined.HelpOutline
 import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.Compress
 import androidx.compose.material.icons.filled.HighQuality
 import androidx.compose.material.icons.outlined.Tune
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -31,18 +27,16 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.core_design_system.theme.Background
-import com.example.core_design_system.theme.IconSecondary
 import com.example.core_design_system.theme.Primary
 import com.example.core_design_system.theme.PrimaryDark
 import com.example.core_design_system.theme.PrimaryPale
 import com.example.core_design_system.theme.TextPrimary
-import com.example.core_design_system.theme.TextSecondary
 import com.example.core_design_system.theme.VideoCompressorTypography
 import com.example.feature.video.compressor.ui.R
 import com.example.feature.video.compressor.ui.presentation.components.CompressVideoButton
 import com.example.feature.video.compressor.ui.presentation.components.CompressionPresetCard
+import com.example.feature.video.compressor.ui.presentation.components.VideoCompressorHeader
 import com.example.feature.video.compressor.ui.presentation.components.EstimatedSizeCard
-import com.example.feature.video.compressor.ui.presentation.components.HeaderIconButton
 import com.example.feature.video.compressor.ui.presentation.components.PrivacyNotice
 import com.example.feature.video.compressor.ui.presentation.components.SelectedVideoCard
 import com.example.feature.video.compressor.ui.presentation.screens.customsettings.CustomCompressionSettingsScreen
@@ -89,7 +83,9 @@ internal fun VideoCompressorSettingsScreen(
         verticalArrangement = Arrangement.spacedBy(18.dp),
     ) {
         item {
-            CompressionSettingsHeader(
+            VideoCompressorHeader(
+                titleResId = R.string.compression_settings_title,
+                subtitleResId = R.string.compression_settings_subtitle,
                 onBackClick = onBackClick,
                 onHelpClick = onHelpClick,
             )
@@ -121,6 +117,7 @@ internal fun VideoCompressorSettingsScreen(
             CompressVideoButton(
                 enabled = state.isCompressButtonEnabled,
                 onClick = onCompressClick,
+                textResId = R.string.compress_video_button
             )
         }
 
@@ -140,52 +137,6 @@ internal fun VideoCompressorSettingsScreen(
         onQualitySelected = onQualitySelected,
         onCodecSelected = onCodecSelected,
     )
-}
-
-@Composable
-private fun CompressionSettingsHeader(
-    onBackClick: () -> Unit,
-    onHelpClick: () -> Unit,
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(14.dp),
-    ) {
-        HeaderIconButton(onClick = onBackClick) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
-                contentDescription = stringResource(R.string.cd_back),
-                tint = IconSecondary,
-                modifier = Modifier.size(26.dp),
-            )
-        }
-
-        Column(
-            modifier = Modifier.weight(1f),
-        ) {
-            Text(
-                text = stringResource(R.string.compression_settings_title),
-                style = VideoCompressorTypography.headlineMedium,
-                color = TextPrimary,
-            )
-
-            Text(
-                text = stringResource(R.string.compression_settings_subtitle),
-                style = VideoCompressorTypography.bodySmall,
-                color = TextSecondary,
-            )
-        }
-
-        HeaderIconButton(onHelpClick) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Outlined.HelpOutline,
-                contentDescription = stringResource(R.string.cd_help),
-                tint = IconSecondary,
-                modifier = Modifier.size(26.dp),
-            )
-        }
-    }
 }
 
 @Composable
@@ -295,7 +246,7 @@ private fun CompressionPresetsSection(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun CustomSettingsBottomSheet(
+private fun CustomSettingsBottomSheet(
     metadata: VideoMetadata?,
     settings: CompressionSettings,
     openBottomSheet: Boolean,
@@ -339,7 +290,7 @@ internal fun CustomSettingsBottomSheet(
 @Composable
 private fun VideoCompressionSettingsScreenPreview() {
     VideoCompressorSettingsScreen(
-        state = VideoCompressorUiState(),
+        state = VideoCompressorUiState(uri = Uri.parse("content://preview/video.mp4"),),
         openBottomSheet = {},
         onBackClick = {},
         onHelpClick = {},

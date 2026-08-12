@@ -1,0 +1,28 @@
+package com.example.feature.video.compressor.ui.presentation.screens.compressionprogress
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.feature.video.compressor.ui.presentation.VideoCompressorViewModel
+
+@Composable
+internal fun VideoCompressionProgressRoute(
+    viewModel: VideoCompressorViewModel,
+    navigateBack: () -> Unit,
+    navigateHelp: () -> Unit,
+) {
+    val state by
+    viewModel.uiState
+        .collectAsStateWithLifecycle()
+
+    VideoCompressionProgressScreen(
+        state = state,
+        onBackClick = navigateBack,
+        onHelpClick = navigateHelp,
+        onCancelClick = {
+            viewModel.onCancelClick()
+            navigateBack()
+        },
+    )
+}

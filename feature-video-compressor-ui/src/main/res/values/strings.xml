@@ -159,4 +159,40 @@
     <!-- Apply -->
     <string name="custom_apply">Применить настройки</string>
 
+    <!-- Compression progress screen -->
+    <string name="compression_progress_title">Сжатие видео</string>
+    <string name="compression_progress_subtitle">Пожалуйста, не закрывайте приложение</string>
+
+    <!-- Progress -->
+    <string name="compression_in_progress">Сжимаем видео…</string>
+    <string name="compression_progress_format">%1$d%%</string>
+    <string name="compression_remaining_time">Осталось: ~%1$s</string>
+
+    <!-- Progress statistics -->
+    <string name="compression_processed">Обработано</string>
+    <string name="compression_processed_format">%1$s / %2$s</string>
+
+    <string name="compression_current_size">Текущий размер</string>
+    <string name="compression_size_format">%1$s МБ</string>
+
+    <string name="compression_remaining">Осталось</string>
+    <string name="compression_remaining_calculating">Вычисляем…</string>
+    <string name="compression_remaining_format">~%1$s</string>
+
+    <!-- Tip -->
+    <string name="compression_tip_title">Совет</string>
+    <string name="compression_tip_description">
+    Вы можете свернуть приложение.&#10;Мы уведомим вас, когда сжатие будет завершено.
+    </string>
+
+    <!-- Selected preset -->
+    <string name="compression_selected_mode">Режим сжатия</string>
+    <string name="compression_size_reduction_format">~%1$d%% меньше, чем оригинал</string>
+
+    <!-- Actions -->
+    <string name="compression_cancel">Отмена сжатия</string>
+
+    <!-- Content descriptions -->
+    <string name="cd_cancel_compression">Отменить сжатие видео</string>
+
 </resources>
