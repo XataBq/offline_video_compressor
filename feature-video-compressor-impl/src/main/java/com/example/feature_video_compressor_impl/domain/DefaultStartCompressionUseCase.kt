@@ -1,14 +1,10 @@
 package com.example.feature_video_compressor_impl.domain
 
-import android.net.Uri
 import com.example.feature_video_compressor_api.model.CompressionPreset
 import com.example.feature_video_compressor_api.model.VideoLocation
 import com.example.feature_video_compressor_api.usecase.StartCompressionUseCase
 import com.example.feature_video_compressor_impl.service.CompressionServiceController
-import com.example.feature_video_compressor_impl.service.CompressionTempFileFactory
-import java.io.File
 import javax.inject.Inject
-import kotlinx.coroutines.flow.Flow
 
 internal class DefaultStartCompressionUseCase @Inject constructor(
     private val serviceController:

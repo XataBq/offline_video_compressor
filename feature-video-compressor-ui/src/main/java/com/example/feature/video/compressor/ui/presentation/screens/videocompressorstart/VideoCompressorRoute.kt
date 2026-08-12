@@ -8,8 +8,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.feature.video.compressor.ui.presentation.VideoCompressorViewModel
 import com.example.feature.video.compressor.ui.presentation.VideoCompressorNews
+import com.example.feature.video.compressor.ui.presentation.VideoCompressorViewModel
 import timber.log.Timber
 
 @Composable
@@ -29,9 +29,6 @@ internal fun VideoCompressorRoute(
         ) {
             viewModel.news.collect { news ->
                 when(news) {
-                    is VideoCompressorNews.NavigateSettings -> {
-                        navigateSettings()
-                    }
                     is VideoCompressorNews.NavigateCompressionSettings -> {
                         Timber.d("navigation to compression settings")
                         navigateCompressionSettings()
@@ -50,7 +47,7 @@ internal fun VideoCompressorRoute(
     }
 
     VideoCompressorScreen(
-        onSettingsClick = viewModel::onSettingsClick,
+        onSettingsClick = navigateSettings,
         onChooseVideoButtonClick = viewModel::onChooseVideoClick
     )
 }

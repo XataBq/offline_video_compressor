@@ -7,6 +7,7 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.effect.FrameDropEffect
 import androidx.media3.effect.Presentation
+import androidx.media3.transformer.Composition
 import androidx.media3.transformer.DefaultEncoderFactory
 import androidx.media3.transformer.EditedMediaItem
 import androidx.media3.transformer.Effects
@@ -16,12 +17,12 @@ import androidx.media3.transformer.ProgressHolder
 import androidx.media3.transformer.Transformer
 import androidx.media3.transformer.VideoEncoderSettings
 import com.example.feature_video_compressor_api.model.CompressionSettings
-import com.example.feature_video_compressor_api.model.CompressionState
-import com.example.feature_video_compressor_impl.calculator.CompressionSettingsResolver
-import com.example.feature_video_compressor_impl.calculator.ResolvedCompressionSettings
 import com.example.feature_video_compressor_api.model.VideoMetadata
 import com.example.feature_video_compressor_api.usecase.VideoMetadataReader
-import java.io.File
+import com.example.feature_video_compressor_impl.calculator.CompressionSettingsResolver
+import com.example.feature_video_compressor_impl.calculator.ResolvedCompressionSettings
+import com.example.feature_video_compressor_impl.mappers.toMimeType
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.delay
@@ -29,11 +30,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import android.media.MediaCodecInfo.EncoderCapabilities.BITRATE_MODE_VBR
-import androidx.media3.transformer.Composition
-import com.example.feature_video_compressor_impl.mappers.toMimeType
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.withContext
+import java.io.File
 import java.io.IOException
 import javax.inject.Inject
 

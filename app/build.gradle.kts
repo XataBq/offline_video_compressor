@@ -13,6 +13,10 @@ android {
         version = release(36)
     }
 
+    androidResources {
+        generateLocaleConfig = true
+    }
+
     defaultConfig {
         applicationId = "com.example.offlinevideocompressor"
         minSdk = 29
@@ -42,6 +46,7 @@ dependencies {
     implementation(project(":core-design-system"))
     implementation(project(":feature-video-compressor-ui"))
     implementation(project(":feature-video-compressor-impl"))
+    implementation(libs.androidx.appcompat)
     // timber
     implementation(libs.timber)
 
@@ -64,6 +69,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons.extended)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

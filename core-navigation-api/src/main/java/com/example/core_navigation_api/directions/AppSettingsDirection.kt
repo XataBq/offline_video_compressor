@@ -1,0 +1,5 @@
+package com.example.core_navigation_api.directions
+
+import com.example.core_navigation_api.domain.StartDirectionProvider
+
+object AppSettingsDirection : StartDirectionProvider

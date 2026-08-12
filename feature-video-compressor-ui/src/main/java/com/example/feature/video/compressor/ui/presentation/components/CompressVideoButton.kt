@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.shadow.Shadow
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
@@ -26,15 +27,18 @@ import com.example.core_design_system.theme.PrimaryLight
 import com.example.core_design_system.theme.ShadowPurple
 import com.example.core_design_system.theme.TextOnPrimary
 import com.example.core_design_system.theme.VideoCompressorTypography
-import com.example.feature.video.compressor.ui.R
 
 @Composable
 internal fun CompressVideoButton(
     enabled: Boolean,
     onClick: () -> Unit,
     text: String,
+    icon: ImageVector = Icons.Filled.AutoAwesome,
 ) {
-    val shape = RoundedCornerShape(20.dp)
+    val shape =
+        RoundedCornerShape(
+            20.dp,
+        )
 
     Button(
         onClick = onClick,
@@ -54,33 +58,50 @@ internal fun CompressVideoButton(
                 ),
             )
             .background(
-                brush = Brush.horizontalGradient(
-                    colors = listOf(
-                        PrimaryLight,
-                        PrimaryDark,
+                brush =
+                    Brush.horizontalGradient(
+                        colors = listOf(
+                            PrimaryLight,
+                            PrimaryDark,
+                        ),
                     ),
-                ),
                 shape = shape,
             ),
         shape = shape,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color.Transparent,
-            contentColor = TextOnPrimary,
-            disabledContainerColor = Color.Transparent,
-            disabledContentColor = TextOnPrimary.copy(alpha = 0.5f),
-        ),
+        colors =
+            ButtonDefaults.buttonColors(
+                containerColor =
+                    Color.Transparent,
+                contentColor =
+                    TextOnPrimary,
+                disabledContainerColor =
+                    Color.Transparent,
+                disabledContentColor =
+                    TextOnPrimary.copy(
+                        alpha = 0.5f,
+                    ),
+            ),
     ) {
         Icon(
-            imageVector = Icons.Filled.AutoAwesome,
+            imageVector = icon,
             contentDescription = null,
-            modifier = Modifier.size(29.dp),
+            modifier =
+                Modifier.size(
+                    26.dp,
+                ),
         )
 
-        Spacer(modifier = Modifier.size(12.dp))
+        Spacer(
+            modifier =
+                Modifier.size(
+                    12.dp,
+                ),
+        )
 
         Text(
             text = text,
-            style = VideoCompressorTypography.titleLarge,
+            style =
+                VideoCompressorTypography.titleLarge,
         )
     }
 }

@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Offline Video Compressor</string>
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_subtitle">App preferences</string>
+
+    <string name="settings_language_title">Language</string>
+    <string name="settings_language_description">
+    Choose the language used in the app
+    </string>
+
+    <string name="settings_language_russian">Russian</string>
+    <string name="settings_language_russian_native">Русский</string>
+
+    <string name="settings_language_english">English</string>
+    <string name="settings_language_english_native">English</string>
+    <string name="cd_back">Back</string>
 </resources>

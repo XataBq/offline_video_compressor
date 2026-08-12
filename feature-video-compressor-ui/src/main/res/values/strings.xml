@@ -1,120 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Offline Video Compressor</string>
+
     <!-- Header -->
     <string name="home_title">Video Compressor</string>
     <string name="home_subtitle">
-        Сжимайте видео без потери качества
-        и экономьте место на устройстве
+        Compress videos without sacrificing quality
+        and save space on your device
     </string>
 
     <!-- Select video card -->
-    <string name="select_video_title">Выберите видео</string>
+    <string name="select_video_title">Select a video</string>
     <string name="select_video_description">
-        Нажмите на карточку, чтобы выбрать видео&#10;из галереи
+        Tap the card to select a video&#10;from your gallery
     </string>
-    <string name="select_video_button">Выбрать видео</string>
-    <string name="supported_formats">Поддерживаются форматы:</string>
-    <string name="supported_formats_list">MP4, MOV, MKV и другие</string>
+    <string name="select_video_button">Select video</string>
+    <string name="supported_formats">Supported formats:</string>
+    <string name="supported_formats_list">MP4, MOV, MKV, and more</string>
 
     <!-- Benefits -->
-    <string name="benefits_title">Почему нам доверяют</string>
+    <string name="benefits_title">Why you’ll love it</string>
 
-    <string name="benefit_no_ads_title">Без рекламы</string>
+    <string name="benefit_no_ads_title">No ads</string>
     <string name="benefit_no_ads_description">
-        Никаких отвлекающих баннеров
-        и всплывающих окон
+        No distracting banners
+        or pop-ups
     </string>
 
-    <string name="benefit_no_watermark_title">Без водяных знаков</string>
+    <string name="benefit_no_watermark_title">No watermarks</string>
     <string name="benefit_no_watermark_description">
-        Ваши видео остаются чистыми
-        и готовыми к публикации
+        Your videos stay clean
+        and ready to share
     </string>
 
-    <string name="benefit_privacy_title">Обработка на устройстве</string>
+    <string name="benefit_privacy_title">On-device processing</string>
     <string name="benefit_privacy_description">
-        Ваши файлы не загружаются в облако.
-        100% конфиденциальность
+        Your files are never uploaded to the cloud.
+        100% private
     </string>
 
     <!-- Bottom card -->
-    <string name="bottom_card_title">Быстро, просто и эффективно</string>
+    <string name="bottom_card_title">Fast, simple, and efficient</string>
     <string name="bottom_card_description">
-        Сжимайте видео за несколько секунд
-        и делитесь без ограничений.
+        Compress videos in just a few moments
+        and share them without limits.
     </string>
 
     <!-- Content descriptions -->
-    <string name="cd_settings">Настройки</string>
-    <string name="cd_select_video">Выбрать видео</string>
-    <string name="cd_arrow">Подробнее</string>
+    <string name="cd_settings">Settings</string>
+    <string name="cd_select_video">Select video</string>
+    <string name="cd_arrow">Learn more</string>
 
     <!-- Compression settings screen -->
-    <string name="compression_settings_title">Настройки сжатия</string>
-    <string name="compression_settings_subtitle">Выберите параметры для сжатия видео</string>
+    <string name="compression_settings_title">Compression settings</string>
+    <string name="compression_settings_subtitle">
+        Choose how you want to compress your video
+    </string>
 
-    <string name="compression_mode_title">Режим сжатия</string>
+    <string name="compression_mode_title">Compression mode</string>
 
     <!-- Presets -->
-    <string name="preset_balanced_title">Быстрый</string>
-    <string name="preset_balanced_description">Оптимальный баланс\nразмера и качества</string>
-    <string name="preset_balanced_savings">~60% меньше</string>
+    <string name="preset_balanced_title">Fast</string>
+    <string name="preset_balanced_description">Optimal balance of\nsize and quality</string>
+    <string name="preset_balanced_savings">~60% smaller</string>
 
-    <string name="preset_max_quality_title">Высокое качество</string>
-    <string name="preset_max_quality_description">Лучшее качество\nпри умеренном сжатии</string>
-    <string name="preset_max_quality_savings">~30% меньше</string>
+    <string name="preset_max_quality_title">High quality</string>
+    <string name="preset_max_quality_description">Best quality\nwith moderate compression</string>
+    <string name="preset_max_quality_savings">~30% smaller</string>
 
-    <string name="preset_strong_title">Максимальное сжатие</string>
-    <string name="preset_strong_description">Минимальный размер</string>
-    <string name="preset_strong_savings">~80% меньше</string>
+    <string name="preset_strong_title">Maximum compression</string>
+    <string name="preset_strong_description">Smallest file size</string>
+    <string name="preset_strong_savings">~80% smaller</string>
 
-    <string name="preset_custom_title">Свои настройки</string>
-    <string name="preset_custom_description">Разрешение, FPS,\nкодек и качество</string>
-    <string name="preset_custom_label">Настроить</string>
-    <string name="preset_custom_selected_label">Выбрано</string>
+    <string name="preset_custom_title">Custom settings</string>
+    <string name="preset_custom_description">Resolution, FPS,\ncodec, and quality</string>
+    <string name="preset_custom_label">Configure</string>
+    <string name="preset_custom_selected_label">Selected</string>
 
     <!-- Estimated size -->
-    <string name="estimated_size_title">Ожидаемый размер</string>
+    <string name="estimated_size_title">Estimated size</string>
     <string name="estimated_size_value">~%1$d MB</string>
     <string name="estimated_size_description">
-    На %1$d%% меньше, чем оригинал (%2$.1f MB)
-</string>
+        %1$d%% smaller than the original (%2$.1f MB)
+    </string>
     <string name="savings_percent">%1$d%%</string>
-    <string name="savings_label">экономия</string>
+    <string name="savings_label">saved</string>
 
     <!-- Custom settings -->
-    <string name="custom_settings_title">Пользовательские настройки</string>
-    <string name="custom_settings_description">Разрешение, битрейт, FPS</string>
+    <string name="custom_settings_title">Custom settings</string>
+    <string name="custom_settings_description">Resolution, bitrate, FPS</string>
 
     <!-- Compress -->
-    <string name="compress_video_button">Сжать видео</string>
+    <string name="compress_video_button">Compress video</string>
     <string name="compression_privacy_description">
-    Обработка выполняется на устройстве.\nВаши файлы в безопасности.
-</string>
+        Processing happens on your device.\nYour files stay private.
+    </string>
 
     <!-- Video metadata -->
     <string name="video_resolution_format">%1$s</string>
     <string name="video_frame_rate_format">%1$d fps</string>
-    <string name="video_file_size_format">%1$.1f МБ</string>
+    <string name="video_file_size_format">%1$.1f MB</string>
 
     <!-- Content descriptions -->
-    <string name="cd_back">Назад</string>
-    <string name="cd_help">Помощь</string>
-    <string name="cd_video_preview">Предпросмотр выбранного видео</string>
-    <string name="cd_play_video">Воспроизвести видео</string>
-    <string name="cd_selected_preset">Выбранный режим сжатия</string>
-    <string name="cd_custom_settings">Открыть пользовательские настройки</string>
-    <string name="cd_compress_video">Начать сжатие видео</string>
+    <string name="cd_back">Back</string>
+    <string name="cd_help">Help</string>
+    <string name="cd_video_preview">Selected video preview</string>
+    <string name="cd_play_video">Play video</string>
+    <string name="cd_selected_preset">Selected compression mode</string>
+    <string name="cd_custom_settings">Open custom settings</string>
+    <string name="cd_compress_video">Start video compression</string>
 
     <!-- Custom compression settings -->
-    <string name="custom_screen_title">Пользовательские настройки</string>
-    <string name="custom_screen_subtitle">Точная настройка параметров сжатия видео</string>
-    <string name="custom_reset">Сбросить</string>
+    <string name="custom_screen_title">Custom settings</string>
+    <string name="custom_screen_subtitle">
+        Fine-tune your video compression settings
+    </string>
+    <string name="custom_reset">Reset</string>
 
     <!-- Resolution -->
-    <string name="custom_resolution_title">Разрешение</string>
-    <string name="custom_resolution_description">Ширина × высота видео</string>
+    <string name="custom_resolution_title">Resolution</string>
+    <string name="custom_resolution_description">Video width × height</string>
 
     <string name="resolution_1080">1920×1080\n(1080p)</string>
     <string name="resolution_720">1280×720\n(720p)</string>
@@ -122,77 +128,127 @@
     <string name="resolution_360">640×360\n(360p)</string>
 
     <!-- Frame rate -->
-    <string name="custom_fps_title">Кадры в секунду (FPS)</string>
-    <string name="custom_fps_description">Плавность движения видео</string>
+    <string name="custom_fps_title">Frames per second (FPS)</string>
+    <string name="custom_fps_description">Video motion smoothness</string>
     <string name="value_fps">%1$d fps</string>
 
     <!-- Quality -->
-    <string name="custom_quality_title">Качество</string>
-    <string name="custom_quality_description">Баланс размера файла и качества видео</string>
+    <string name="custom_quality_title">Quality</string>
+    <string name="custom_quality_description">
+        Balance between file size and video quality
+    </string>
 
-    <string name="quality_max_compression">Макс. сжатие</string>
-    <string name="quality_low">Низкое</string>
-    <string name="quality_medium">Среднее</string>
-    <string name="quality_high">Высокое</string>
-    <string name="quality_max">Макс. качество</string>
+    <string name="quality_max_compression">Max compression</string>
+    <string name="quality_low">Low</string>
+    <string name="quality_medium">Medium</string>
+    <string name="quality_high">High</string>
+    <string name="quality_max">Max quality</string>
 
-    <string name="custom_quality_smaller_size">Меньше размер</string>
-    <string name="custom_quality_better_quality">Лучше качество</string>
+    <string name="custom_quality_smaller_size">Smaller size</string>
+    <string name="custom_quality_better_quality">Better quality</string>
 
     <!-- Codec -->
-    <string name="custom_codec_title">Формат и кодек</string>
-    <string name="custom_codec_description">Формат файла и метод кодирования</string>
+    <string name="custom_codec_title">Format and codec</string>
+    <string name="custom_codec_description">File format and encoding method</string>
 
     <string name="custom_codec_h264">MP4 (H.264)</string>
     <string name="custom_codec_h265">MP4 (H.265)</string>
 
-    <string name="custom_codec_h264_description">Совместимость</string>
-    <string name="custom_codec_h265_description">Меньше размер</string>
+    <string name="custom_codec_h264_description">Best compatibility</string>
+    <string name="custom_codec_h265_description">Smaller size</string>
 
     <!-- Common -->
-    <string name="value_original">Оригинал</string>
+    <string name="value_original">Original</string>
 
     <!-- Hint -->
-    <string name="custom_hint_title">Что означают эти настройки?</string>
-    <string name="custom_hint_description">Чем ниже разрешение, FPS и качество — тем меньше размер файла. Но при этом может снижаться качество видео.</string>
+    <string name="custom_hint_title">What do these settings mean?</string>
+    <string name="custom_hint_description">
+        Lower resolution, FPS, and quality reduce the file size, but may also reduce video quality.
+    </string>
 
     <!-- Apply -->
-    <string name="custom_apply">Применить настройки</string>
+    <string name="custom_apply">Apply settings</string>
 
     <!-- Compression progress screen -->
-    <string name="compression_progress_title">Сжатие видео</string>
-    <string name="compression_progress_subtitle">Пожалуйста, не закрывайте приложение</string>
+    <string name="compression_progress_title">Compressing video</string>
+    <string name="compression_progress_subtitle">
+        Please don’t close the app
+    </string>
 
     <!-- Progress -->
-    <string name="compression_in_progress">Сжимаем видео…</string>
+    <string name="compression_in_progress">Compressing video…</string>
     <string name="compression_progress_format">%1$d%%</string>
-    <string name="compression_remaining_time">Осталось: ~%1$s</string>
+    <string name="compression_remaining_time">Remaining: ~%1$s</string>
 
     <!-- Progress statistics -->
-    <string name="compression_processed">Обработано</string>
+    <string name="compression_processed">Processed</string>
     <string name="compression_processed_format">%1$s / %2$s</string>
 
-    <string name="compression_current_size">Текущий размер</string>
-    <string name="compression_size_format">%1$s МБ</string>
+    <string name="compression_current_size">Current size</string>
+    <string name="compression_size_format">%1$s MB</string>
 
-    <string name="compression_remaining">Осталось</string>
-    <string name="compression_remaining_calculating">Вычисляем…</string>
+    <string name="compression_remaining">Remaining</string>
+    <string name="compression_remaining_calculating">Calculating…</string>
     <string name="compression_remaining_format">~%1$s</string>
 
     <!-- Tip -->
-    <string name="compression_tip_title">Совет</string>
+    <string name="compression_tip_title">Tip</string>
     <string name="compression_tip_description">
-    Вы можете свернуть приложение.&#10;Мы уведомим вас, когда сжатие будет завершено.
+        You can minimize the app.&#10;We’ll notify you when compression is complete.
     </string>
 
     <!-- Selected preset -->
-    <string name="compression_selected_mode">Режим сжатия</string>
-    <string name="compression_size_reduction_format">~%1$d%% меньше, чем оригинал</string>
+    <string name="compression_selected_mode">Compression mode</string>
+    <string name="compression_size_reduction_format">
+        ~%1$d%% smaller than the original
+    </string>
 
     <!-- Actions -->
-    <string name="compression_cancel">Отмена сжатия</string>
+    <string name="compression_cancel">Cancel compression</string>
 
     <!-- Content descriptions -->
-    <string name="cd_cancel_compression">Отменить сжатие видео</string>
+    <string name="cd_cancel_compression">Cancel video compression</string>
+
+    <!-- Compression result -->
+    <string name="compression_result_title">Compression complete! 🎉</string>
+    <string name="compression_result_subtitle">
+        Your video has been compressed successfully and is ready
+    </string>
+
+    <string name="compression_result_home">Home</string>
+
+    <string name="compression_result_success_title">Success!</string>
+    <string name="compression_result_success_description">
+        Your video has been compressed and saved to your gallery
+    </string>
+
+    <string name="compression_result_before">Before</string>
+    <string name="compression_result_after">After</string>
+
+    <string name="compression_result_size">Size</string>
+    <string name="compression_result_resolution">Resolution</string>
+    <string name="compression_result_fps">FPS</string>
+    <string name="compression_result_duration">Duration</string>
+
+    <string name="compression_result_size_mb">%1$.1f MB</string>
+    <string name="compression_result_size_mb_integer">%1$d MB</string>
+    <string name="compression_result_fps_format">%1$d fps</string>
+    <string name="compression_result_resolution_format">%1$d×%2$d</string>
+    <string name="compression_result_savings_format">-%1$d%%</string>
+
+    <string name="compression_result_video_fallback_name">Compressed video</string>
+    <string name="compression_result_saved">Saved to gallery</string>
+
+    <string name="compression_result_next">What’s next?</string>
+
+    <string name="compression_result_share">Share</string>
+    <string name="compression_result_share_description">
+        Send the video to a messenger or another app
+    </string>
+
+    <string name="compression_result_cd_back">Back</string>
+    <string name="compression_result_cd_home">Home</string>
+    <string name="compression_result_cd_edit">Edit compression settings</string>
+    <string name="compression_result_cd_share">Share video</string>
 
 </resources>

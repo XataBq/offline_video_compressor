@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import com.example.core_navigation_api.directions.AppSettingsDirection
 import com.example.core_navigation_api.domain.FeatureNavGraph
 import com.example.core_navigation_api.domain.StartDirectionProvider
 import com.example.feature.video.compressor.ui.navigation.directions.VideoCompressionProgressDirection
@@ -16,8 +17,8 @@ import com.example.feature.video.compressor.ui.navigation.directions.VideoCompre
 import com.example.feature.video.compressor.ui.navigation.directions.VideoCompressorSettingsDirection
 import com.example.feature.video.compressor.ui.navigation.directions.VideoCompressorStartDirectionProvider
 import com.example.feature.video.compressor.ui.presentation.VideoCompressorViewModel
-import com.example.feature.video.compressor.ui.presentation.screens.VideoCompressorResultScreen
 import com.example.feature.video.compressor.ui.presentation.screens.compressionprogress.VideoCompressionProgressRoute
+import com.example.feature.video.compressor.ui.presentation.screens.compressionresult.VideoCompressionResultRoute
 import com.example.feature.video.compressor.ui.presentation.screens.videocompressorsettings.VideoCompressorSettingsRoute
 import com.example.feature.video.compressor.ui.presentation.screens.videocompressorstart.VideoCompressorRoute
 
@@ -37,14 +38,31 @@ class CompressorNavigationGraph : FeatureNavGraph {
                 )
                 VideoCompressorRoute(
                     viewModel = viewModel,
-                    navigateSettings = {},
+                    navigateSettings = {
+                        navController.navigate(AppSettingsDirection.screenName)
+                    },
                     navigateCompressionSettings = {
                         navController.navigate(VideoCompressorSettingsDirection.screenName)
                     }
                 )
             }
             composable(VideoCompressorResultDirection.screenName) { backStackEntry ->
-                VideoCompressorResultScreen()
+                val viewModel = sharedGraphViewModel<VideoCompressorViewModel>(
+                    navController = navController,
+                    backStackEntry = backStackEntry,
+                )
+                VideoCompressionResultRoute(
+                    viewModel = viewModel,
+                    navigateBack = { navController.popBackStack() },
+                    navigateHome = { navController.popBackStack(
+                            route = VideoCompressorStartDirectionProvider.screenName,
+                            inclusive = false,
+                        )
+                    },
+                    navigateCompressionSettings = { navController.navigate(
+                        VideoCompressorSettingsDirection.screenName
+                    )},
+                )
             }
             composable(VideoCompressorSettingsDirection.screenName) { backStackEntry ->
                 val viewModel = sharedGraphViewModel<VideoCompressorViewModel>(
@@ -69,6 +87,17 @@ class CompressorNavigationGraph : FeatureNavGraph {
                     viewModel = viewModel,
                     navigateBack = { navController.popBackStack() },
                     navigateHelp = {},
+                    navigateCompressionResult = {
+                        navController.navigate(
+                            VideoCompressorResultDirection.screenName,
+                        ) {
+                            popUpTo(
+                                VideoCompressionProgressDirection.screenName,
+                            ) {
+                                inclusive = true
+                            }
+                        }
+                    },
                 )
             }
         }

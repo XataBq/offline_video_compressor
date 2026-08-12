@@ -1,7 +1,7 @@
 package com.example.feature_video_compressor_impl.calculator
 
-import com.example.feature_video_compressor_api.model.VideoResolution
 import com.example.feature_video_compressor_api.model.VideoMetadata
+import com.example.feature_video_compressor_api.model.VideoResolution
 import javax.inject.Inject
 import kotlin.math.roundToInt
 

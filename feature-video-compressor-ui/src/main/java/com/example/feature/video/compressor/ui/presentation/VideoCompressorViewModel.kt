@@ -1,9 +1,9 @@
 package com.example.feature.video.compressor.ui.presentation
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.feature.video.compressor.ui.presentation.state.VideoCompressorState
 import com.example.feature.video.compressor.ui.presentation.state.VideoCompressorUiState
 import com.example.feature.video.compressor.ui.utils.CompressionEstimateCalculator
 import com.example.feature_video_compressor_api.model.CompressionPreset
@@ -40,14 +40,6 @@ internal class VideoCompressorViewModel @Inject constructor(
     private val thumbnailProvider: VideoThumbnailProvider,
     private val compressionEstimateCalculator: CompressionEstimateCalculator,
 ) : ViewModel() {
-
-    private val _state =
-        MutableStateFlow(
-            VideoCompressorState.OnboardingScreen,
-        )
-
-    val state =
-        _state.asStateFlow()
 
     private val _uiState =
         MutableStateFlow(
@@ -95,7 +87,6 @@ internal class VideoCompressorViewModel @Inject constructor(
                         compressionTimeLeftMs = null,
                         isCompressing = true,
                         isCompressButtonEnabled = false,
-                        compressedVideoLocation = null,
                     )
                 }
             }
@@ -120,20 +111,27 @@ internal class VideoCompressorViewModel @Inject constructor(
                         compressionTimeLeftMs = 0L,
                         isCompressing = false,
                         isCompressButtonEnabled = true,
+
                         compressedVideoLocation =
                             state.outputLocation,
+
+                        completedOriginalSizeBytes =
+                            state.originalSizeBytes,
+
+                        completedCompressedSizeBytes =
+                            state.compressedSizeBytes,
                     )
                 }
 
-                Timber.d(
-                    "Compression completed: %s",
-                    state.outputLocation.value,
+                loadCompressedVideoResult(
+                    location = state.outputLocation,
                 )
             }
 
             is CompressionState.Failed -> {
                 _uiState.update {
                     it.copy(
+                        compressionProgress = null,
                         compressionTimeLeftMs = null,
                         isCompressing = false,
                         isCompressButtonEnabled = true,
@@ -155,20 +153,73 @@ internal class VideoCompressorViewModel @Inject constructor(
                         isCompressButtonEnabled = true,
                     )
                 }
+            }
+        }
+    }
 
-                Timber.d(
-                    "Video compression cancelled",
+    @SuppressLint("UseKtx")
+    private fun loadCompressedVideoResult(
+        location: VideoLocation,
+    ) {
+        viewModelScope.launch {
+            val uri = Uri.parse(location.value,)
+
+            try {
+                val metadata =
+                    withContext(Dispatchers.IO) {
+                        videoMetadataReader.read(
+                            uri,
+                        )
+                    }
+
+                val previewTimeMs =
+                    minOf(
+                        metadata.durationMs,
+                        PREVIEW_TIME_MS,
+                    )
+
+                val preview =
+                    withContext(Dispatchers.IO) {
+                        thumbnailProvider.getThumbnail(
+                            uri = uri,
+                            timeMs = previewTimeMs,
+                        )
+                    }
+
+                _uiState.update {
+                    it.copy(
+                        compressedVideoMetadata =
+                            metadata,
+                        compressedVideoPreview =
+                            preview,
+                    )
+                }
+            } catch (throwable: Throwable) {
+                Timber.e(
+                    throwable,
+                    "Failed to read compressed video",
+                )
+            } finally {
+                _news.send(
+                    VideoCompressorNews
+                        .NavigateCompressionResult,
                 )
             }
         }
     }
 
-    fun onSettingsClick() {
-        viewModelScope.launch {
-            _news.send(
-                VideoCompressorNews.NavigateSettings,
-            )
-        }
+    @SuppressLint("UseKtx")
+    fun onEditCompressedVideoClick() {
+        val outputLocation =
+            _uiState.value
+                .compressedVideoLocation
+                ?: return
+
+        val uri = Uri.parse(outputLocation.value)
+
+        onVideoChosen(
+            uri = uri,
+        )
     }
 
     fun onChooseVideoClick() {
@@ -185,26 +236,31 @@ internal class VideoCompressorViewModel @Inject constructor(
         _uiState.update {
             it.copy(
                 uri = uri,
+
                 videoMetadata = null,
                 videoPreview = null,
+
                 estimatedSizeMb = null,
                 savingsPercent = null,
+
                 compressionProgress = null,
                 compressionTimeLeftMs = null,
+
                 compressedVideoLocation = null,
+                compressedVideoMetadata = null,
+                compressedVideoPreview = null,
+                completedOriginalSizeBytes = null,
+                completedCompressedSizeBytes = null,
+
                 isCompressing = false,
                 isCompressButtonEnabled = true,
             )
         }
 
-        Timber.d(
-            "Video was chosen: %s",
-            uri,
-        )
-
         viewModelScope.launch {
             _news.send(
-                VideoCompressorNews.NavigateCompressionSettings,
+                VideoCompressorNews
+                    .NavigateCompressionSettings,
             )
 
             try {
@@ -218,10 +274,6 @@ internal class VideoCompressorViewModel @Inject constructor(
                         videoMetadata = metadata,
                     )
                 }
-
-                Timber.d(
-                    "Video metadata updated",
-                )
 
                 val previewTimeMs =
                     minOf(
@@ -247,7 +299,7 @@ internal class VideoCompressorViewModel @Inject constructor(
             } catch (throwable: Throwable) {
                 Timber.e(
                     throwable,
-                    "Failed to load video data",
+                    "Failed to load selected video",
                 )
             }
         }

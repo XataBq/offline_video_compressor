@@ -9,12 +9,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -71,6 +75,11 @@ internal fun VideoCompressionProgressScreen(
     onCancelClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val topInset = WindowInsets.safeDrawing
+        .only(WindowInsetsSides.Top)
+        .asPaddingValues()
+        .calculateTopPadding()
+
     val timeLeft = state
         .compressionTimeLeftMs
         ?.formatDuration()
@@ -83,11 +92,10 @@ internal fun VideoCompressionProgressScreen(
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
-            .statusBarsPadding()
             .background(Background),
         contentPadding = PaddingValues(
             start = 16.dp,
-            top = 16.dp,
+            top = topInset + 16.dp,
             end = 16.dp,
             bottom = 28.dp,
         ),

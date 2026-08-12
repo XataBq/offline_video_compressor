@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Offline Video Compressor</string>
+    <!-- Settings -->
+    <string name="settings_title">Настройки</string>
+    <string name="settings_subtitle">Настройки приложения</string>
+
+    <string name="settings_language_title">Язык</string>
+    <string name="settings_language_description">
+    Выберите язык интерфейса приложения
+</string>
+
+    <string name="settings_language_russian">Русский</string>
+    <string name="settings_language_russian_native">Русский</string>
+
+    <string name="settings_language_english">Английский</string>
+    <string name="settings_language_english_native">English</string>
+</resources>

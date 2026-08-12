@@ -2,13 +2,11 @@ package com.example.feature_video_compressor_impl.service
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import androidx.core.content.ContextCompat
 import com.example.feature_video_compressor_api.model.CompressionSettings
 import com.example.feature_video_compressor_api.model.VideoLocation
 import com.example.feature_video_compressor_impl.service.mappers.toParcel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
 

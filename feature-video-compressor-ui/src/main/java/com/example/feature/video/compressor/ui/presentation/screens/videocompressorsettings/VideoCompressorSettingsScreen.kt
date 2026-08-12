@@ -6,9 +6,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bolt
@@ -35,10 +39,10 @@ import com.example.core_design_system.theme.VideoCompressorTypography
 import com.example.feature.video.compressor.ui.R
 import com.example.feature.video.compressor.ui.presentation.components.CompressVideoButton
 import com.example.feature.video.compressor.ui.presentation.components.CompressionPresetCard
-import com.example.feature.video.compressor.ui.presentation.components.VideoCompressorHeader
 import com.example.feature.video.compressor.ui.presentation.components.EstimatedSizeCard
 import com.example.feature.video.compressor.ui.presentation.components.PrivacyNotice
 import com.example.feature.video.compressor.ui.presentation.components.SelectedVideoCard
+import com.example.feature.video.compressor.ui.presentation.components.VideoCompressorHeader
 import com.example.feature.video.compressor.ui.presentation.screens.customsettings.CustomCompressionSettingsScreen
 import com.example.feature.video.compressor.ui.presentation.state.VideoCompressorUiState
 import com.example.feature_video_compressor_api.model.CompressionPreset
@@ -69,14 +73,19 @@ internal fun VideoCompressorSettingsScreen(
     requireNotNull(state.uri) {
         "VideoCompressorSettingsScreen requires selected video Uri"
     }
+
+    val topInset = WindowInsets.safeDrawing
+        .only(WindowInsetsSides.Top)
+        .asPaddingValues()
+        .calculateTopPadding()
+
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
-            .statusBarsPadding()
             .background(Background),
         contentPadding = PaddingValues(
             start = 16.dp,
-            top = 16.dp,
+            top = topInset + 16.dp,
             end = 16.dp,
             bottom = 28.dp,
         ),

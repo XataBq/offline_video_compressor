@@ -9,7 +9,7 @@ internal fun AppGraph() {
     val navController = rememberNavController()
     BaseAppNavigation(
         navController = navController,
-        featureGraphs = FeatureGraphs.FEATURE_GRAPHS,
+        featureGraphs = NavigationGraphs.GRAPHS,
         startDirectionProvider = CompressorNavigationGraph.COMPRESSOR_GRAPH_ROUTE,
     )
 }
