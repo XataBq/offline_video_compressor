@@ -30,7 +30,7 @@
 </p>
 
 <p align="center">
-  <img src="screenshots/custom_settings_modal" width="220" />
+  <img src="screenshots/custom_settings_modal.jpg" width="220" />
   <img src="screenshots/compressing_video_progress.jpg" width="220" />
   <img src="screenshots/result_screen.jpg" width="220" />
 </p>
