@@ -1,0 +1,55 @@
+# Offline Video Compressor — Source Available License
+
+Copyright © 2026 Grigory Liashchenko
+
+All rights reserved except as expressly granted below.
+
+## 1. Permissions
+
+You are granted a non-exclusive, worldwide, royalty-free license to:
+
+- View, study, and analyze the source code.
+- Copy, modify, and adapt individual portions of the source code.
+- Incorporate those portions into independent personal or commercial software projects.
+- Distribute such independent projects, including in source or binary form, subject to the restrictions below.
+
+## 2. Restrictions
+
+You may not, without prior written permission from the copyright holder:
+
+- Redistribute, publish, sell, sublicense, or otherwise make available the Offline Video Compressor application as a whole.
+- Distribute a modified, renamed, or rebranded version that remains substantially the same application.
+- Repackage the application under a different name, package identifier, or visual identity.
+- Use the project's name, logo, icons, or original branding assets in another distributed application.
+
+These restrictions apply regardless of whether the application is distributed free of charge or commercially.
+
+## 3. Independent Projects
+
+Independent projects may incorporate portions of the source code, provided that they do not constitute a redistribution or substantially equivalent version of Offline Video Compressor.
+
+When distributing a project containing portions of this source code, you must retain the following attribution in its source code or accompanying notices:
+
+"Contains code from Offline Video Compressor.
+Copyright © 2026 [Your Full Legal Name].
+Used under the Offline Video Compressor Source Available License."
+
+## 4. Third-Party Components
+
+This license applies only to original materials owned by the copyright holder.
+
+Third-party libraries and components remain subject to their respective licenses.
+
+## 5. No Warranty
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, TO THE EXTENT PERMITTED BY APPLICABLE LAW.
+
+## 6. Termination
+
+The permissions granted under this license terminate automatically if you violate its terms. Termination does not affect rights or remedies available to the copyright holder under applicable law.
+
+## 7. Other Rights
+
+No trademark, patent, or other intellectual property rights are granted except for the copyright permissions expressly stated in this license.
+
+For additional permissions, contact the copyright holder.
