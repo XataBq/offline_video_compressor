@@ -332,3 +332,17 @@ Planned improvements include:
 **Grigory Liashchenko**
 
 Android Developer
+
+## License
+
+Copyright © 2026 Grigory Liashchenko. All rights reserved.
+
+This project is distributed under the [Offline Video Compressor Source Available License](LICENSE).
+
+You are free to view, study, modify, and reuse portions of the source code in independent personal or commercial projects, subject to the license terms.
+
+**Redistribution, repackaging, or publication of Offline Video Compressor, including substantially equivalent modified or rebranded versions, is prohibited without prior written permission from the copyright holder.**
+
+The project's name, logo, and original branding assets may not be reused without permission.
+
+See the [LICENSE](LICENSE) file for the full terms.
